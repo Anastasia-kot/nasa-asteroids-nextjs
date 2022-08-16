@@ -1,0 +1,92 @@
+.HeaderWrapper {
+    background-color: black;
+    color: white;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+ 
+}
+
+.HeaderImg{
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    background-color: black;
+ }
+
+.Header {
+    margin: 0 auto;
+    max-width: 1000px;
+    min-width: 362px;
+    padding: 16px  30px;
+    
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    z-index: 1;
+    position: relative;
+    text-shadow:  10px 10px 20px rgb(0, 0, 0), -10px -10px 20px rgb(0, 0, 0),10px -10px 20px rgb(0, 0, 0),-10px 10px 20px rgb(0, 0, 0) ;
+}
+
+.CompanyInfoWrapper {
+    display: flex;
+    flex-direction: column;
+    /* padding-top: 16px;
+    padding-left: 30px; */
+    margin-bottom: 16px;
+}
+
+.CompanyName {
+    font-family: Helvetica;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+    text-transform: uppercase;
+
+    margin-bottom: 8px;
+    white-space:  nowrap ;
+}
+
+.CompanyAbout {
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
+    margin-left: 3px;
+}
+
+.LinksWrapper {
+    display: flex;
+    /* padding-right: 30px;
+    padding-top: 16px; */
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+
+
+.Link {
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: right;
+    text-decoration: underline;
+}
+
+.LinkActive {
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
+    text-decoration: none;
+}
