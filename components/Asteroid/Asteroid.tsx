@@ -6,9 +6,9 @@ const dino = require('./../../public/img/dino.svg');
 const asteroid = require('./../../public/img/asteroid.svg');
 // import dino from './../../public/img/dino.svg';
 // import asteroid from './../../public/img/asteroid.svg';
-import { dateConverter, dateCloserFinder } from "./../../helpers/dateConverters";
-import { nameConverter } from "./../../helpers/nameConverters";
-import { diameterConverter } from "./../../helpers/diameterConverters";
+import { dateConverter, dateCloserFinder } from "./../../helpers/dateConverters.js";
+import { nameConverter } from "./../../helpers/nameConverters.js";
+import { diameterConverter } from "./../../helpers/diameterConverters.js";
 import { AsteroidType } from '../../types';
 
 

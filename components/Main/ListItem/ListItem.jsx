@@ -8,10 +8,10 @@ import Link from "next/link";
 
 import  dino  from './../../../public/img/dino.svg';
 import  asteroid  from './../../../public/img/asteroid.svg';
-import { dateConverter } from "../../../helpers/dateConverters.ts";
-import { nameConverter } from "../../../helpers/nameConverters.ts";
-import { diameterConverter } from "../../../helpers/diameterConverters.ts";
-import { distanceOrbitSuffix } from "../../../helpers/nameConverters.ts";
+import { dateConverter } from "../../../helpers/dateConverters.js";
+import { nameConverter } from "../../../helpers/nameConverters.js";
+import { diameterConverter } from "../../../helpers/diameterConverters.js";
+import { distanceOrbitSuffix } from "../../../helpers/nameConverters.js";
 
 
 

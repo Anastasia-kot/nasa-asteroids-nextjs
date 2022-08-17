@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './ListItemLiquidation.module.css';
+import styles from './ListItem.module.css';
 import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +9,9 @@ import Link from "next/link";
 import  dino  from './../../../public/img/dino.svg';
 import  asteroid  from './../../../public/img/asteroid.svg';
 import { dateConverter } from "../../../helpers/dateConverters.js";
-import { nameConverter } from "../../../helpers/nameConverters.js";
-import { diameterConverter } from "../../../helpers/diameterConverters.js";
-import { distanceOrbitSuffix } from "../../../helpers/nameConverters.js";
+import { nameConverter } from "../../../helpers/nameConverters.ts";
+import { diameterConverter } from "../../../helpers/diameterConverters.ts";
+import { distanceOrbitSuffix } from "../../../helpers/nameConverters.ts";
 
 
 
@@ -25,7 +25,7 @@ import { distanceOrbitSuffix } from "../../../helpers/nameConverters.js";
 
 
 
-const ListItemLiquidation = (props) => {
+const ListItem = (props) => {
     
 
     return (
@@ -82,13 +82,18 @@ const ListItemLiquidation = (props) => {
 
 
 
-              
+                <button className={styles.AsteroidLiquidate} onClick={()=>{
+                        let serialObj = JSON.stringify(props); //сериализуем его
+                        localStorage.setItem(props.id, serialObj); //запишем его в хранилище по ключу "myKey"
+                }}>
+                    Уничтожить
+                </button>
                
             </div>
     )
 }
 
-export default ListItemLiquidation;
+export default ListItem;
 
 
 
