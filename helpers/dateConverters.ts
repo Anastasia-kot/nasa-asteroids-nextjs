@@ -39,13 +39,16 @@ export const dateCloserFinder = (dates: Array<close_approach_dateType>):string =
     let now = new Date(); 
     now.setHours(0, 0, 0, 0);
 
-    let closeDate = new Date( dates[0].close_approach_date);
+    let closeDate; 
+    // = new Date( dates[0].close_approach_date);
     
  
 
         let i = 0;
         do {
-            closeDate.setFullYear( dates[i].close_approach_date.split('-')[0], dates[i].close_approach_date.split('-')[1], dates[i].close_approach_date.split('-')[2]);
+            closeDate = new Date(dates[i].close_approach_date)
+            
+            // .setFullYear( dates[i].close_approach_date.split('-')[0], dates[i].close_approach_date.split('-')[1], dates[i].close_approach_date.split('-')[2]);
             i++;
         } while ((closeDate < now) && (dates.length >= i)) 
     
