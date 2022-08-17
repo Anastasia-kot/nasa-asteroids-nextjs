@@ -1,19 +1,16 @@
 import React, { useEffect, useState, FC } from "react";
+import { AsteroidListType, MeasureUnitType } from "../../types";
 import ListItem from "./ListItem/ListItem";
 import styles from './Main.module.css';
 
+type PropsType = {
+    asteroidsList: AsteroidListType
+}
 
-const Main:FC<any> = ({asteroidsList}) => {
+const Main: FC<PropsType> = ({asteroidsList}) => {
 
-
-
-    let [measureUnit, setMeasureUnit] = useState('km');
-    let [isDangerFlag, setIsDangerFlag] = useState(false);
-
-
-
-    console.log(asteroidsList)
-
+    let [measureUnit, setMeasureUnit] = useState('km'as MeasureUnitType);
+    let [isDangerFlag, setIsDangerFlag] = useState(false as boolean);
 
 
 
@@ -71,8 +68,8 @@ const Main:FC<any> = ({asteroidsList}) => {
                     {!!asteroidsList && (asteroidsList.length > 0) && 
                         asteroidsList.map(m => 
                             isDangerFlag 
-                            ? (m.is_potentially_hazardous_asteroid) && <ListItem {...m} isDangerFlag={isDangerFlag} measureUnit={measureUnit} key={m.id} />
-                            : <ListItem {...m} isDangerFlag={isDangerFlag} measureUnit={measureUnit} key={m.id} />
+                            ? (m.is_potentially_hazardous_asteroid) && <ListItem asteroid={m} measureUnit={measureUnit} key={m.id} />
+                            : <ListItem asteroid={m}  measureUnit={measureUnit} key={m.id} />
 
                         )
                     }

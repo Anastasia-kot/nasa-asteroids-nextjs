@@ -1,21 +1,25 @@
 import React, {FC} from 'react';
-import classNames from "classnames";
+// import classNames from "classnames";
+import classNames from '../../node_modules/classnames/index';
 import styles from './Asteroid.module.css';
-import Image from 'next/image';
+import Image from '../../node_modules/next/image';
+// import Image from 'next/image';
 const dino = require('./../../public/img/dino.svg');
 const asteroid = require('./../../public/img/asteroid.svg');
 // import dino from './../../public/img/dino.svg';
 // import asteroid from './../../public/img/asteroid.svg';
-import { dateConverter, dateCloserFinder } from "./../../helpers/dateConverters.js";
-import { nameConverter } from "./../../helpers/nameConverters.js";
-import { diameterConverter } from "./../../helpers/diameterConverters.js";
+import { dateConverter, dateCloserFinder } from "./../../helpers/dateConverters";
+import { nameConverter } from "./../../helpers/nameConverters";
+import { diameterConverter } from "./../../helpers/diameterConverters";
 import { AsteroidType } from '../../types';
 
 
   
+type PropsType = {
+    asteroidInfo: AsteroidType
+}
 
-
-const Asteroid:FC<any> = ({ asteroidInfo }) => {
+const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
 
   
 
@@ -40,13 +44,13 @@ const Asteroid:FC<any> = ({ asteroidInfo }) => {
 
 
                     <div className={styles.Date}>
-                        { (asteroidInfo.id !== 0)  && 
+                      
                             <span>
                                 <b>Ближайшие даты сближения: </b>
                                 {dateConverter(dateCloserFinder( asteroidInfo.close_approach_data) ) }
                             </span>                   
                         
-                        }
+                        
                     </div>
                     <div className={styles.AsteroidBlock}>
                         <div className={classNames (
@@ -65,31 +69,29 @@ const Asteroid:FC<any> = ({ asteroidInfo }) => {
 
 
                             <div className={styles.AsteroidName}> 
-                                {(asteroidInfo.id !== 0) &&
                                     <span>
                                         Астероид {nameConverter(asteroidInfo.name)}
-                                    </span>}
+                                    </span>
                             </div>
 
 
                             <div className={styles.AsteroidDiameter}>
-                                {(asteroidInfo.id !== 0) && 
+                 
                                     <span>
                                         Ø {diameterConverter(
                                             asteroidInfo.estimated_diameter.meters.estimated_diameter_max,
                                             asteroidInfo.estimated_diameter.meters.estimated_diameter_min
                                         )} м
                                     </span>
-                                }
+                                
                             </div>
 
 
                             <div className={styles.AsteroidDistance}>
-                                {(asteroidInfo.id !== 0) && 
                                     <span>
-                                        ↔ {Math.ceil(asteroidInfo.close_approach_data[0].miss_distance.kilometers)} км
+                                        ↔ {Math.ceil(+asteroidInfo.close_approach_data[0].miss_distance.kilometers)} км
 
-                                    </span>}
+                                    </span>
                             </div>
                             <div className={styles.AsteroidIsDanger}>
                                 {asteroidInfo.is_potentially_hazardous_asteroid
@@ -98,7 +100,12 @@ const Asteroid:FC<any> = ({ asteroidInfo }) => {
                             </div>
                         </div>
                     </div>
-                    <button className={styles.AsteroidLiquidate}>
+                    <button 
+                    onClick={ ()=>{
+                        let serialObj = JSON.stringify(asteroidInfo); //сериализуем его
+                        localStorage.setItem(asteroidInfo.id, serialObj); //запишем его в хранилище по ключу "myKey"
+                    }}
+                        className={styles.AsteroidLiquidate}>
                         Уничтожить
                     </button>
              </div>

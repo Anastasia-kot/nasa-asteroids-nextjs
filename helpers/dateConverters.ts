@@ -1,4 +1,6 @@
-export const dateConverter = (date: string) => {
+import { close_approach_dateType } from "../types";
+
+export const dateConverter = (date: string): string => {
     let day = date.split('-')[2];
     let month = date.split('-')[1];
     switch (month) {
@@ -24,15 +26,15 @@ export const dateConverter = (date: string) => {
 
 
 
-export const dateToYesterday = (date: string) => {
-    let day = +date.split('-')[2] - 2 ;
-    let newDate = date.split(-1)[0] + '-' + day;
-    return newDate;
-}
+// export const dateToYesterday = (date: string) => {
+//     let day = +date.split('-')[2] - 2 ;
+//     let newDate = date.split(-1)[0] + '-' + day;
+//     return newDate;
+// }
 
 
 
-export const dateCloserFinder = (dates: Array<object>) => {    
+export const dateCloserFinder = (dates: Array<close_approach_dateType>):string => {    
     
     let now = new Date(); 
     now.setHours(0, 0, 0, 0);

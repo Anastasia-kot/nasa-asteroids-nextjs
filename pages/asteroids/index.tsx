@@ -1,6 +1,7 @@
 // import '../styles/globals.css';
-import { useEffect, useState } from 'react'
-import Main from '../../components/Main/Main.tsx'
+import { FC, useEffect, useState } from 'react'
+import Main from '../../components/Main/Main'
+import { AsteroidListType } from '../../types';
 
 export const getStaticProps = async () => {
     let dateToString = (new Date()).toISOString().split('T')[0];
@@ -13,15 +14,16 @@ export const getStaticProps = async () => {
     }
 
     return {
-        props: { asteroidsList: data.near_earth_objects[[dateToString]] }
+        props: { asteroidsList: data.near_earth_objects[dateToString] }
     }
 }
  
 
+type PropsType = {
+    asteroidsList: AsteroidListType
+}
 
-
-const Asteroids = ({asteroidsList}) =>  {
-
+const Asteroids: FC<PropsType> = ({asteroidsList}) =>  {
     return (  <Main asteroidsList={asteroidsList}/>    )
 }
 

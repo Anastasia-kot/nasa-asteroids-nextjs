@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { dateToYesterday } from "../../helpers/dateConverters.ts";
 import styles from './Header.module.css';
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Image from "next/image";
-
+import Link from "../../node_modules/next/link";
+import { useRouter } from "../../node_modules/next/router";
+// import Image from "../../node_modules/next/image";
+ 
 
 
 // export const getStaticProps = async () => {
@@ -46,7 +46,7 @@ const {pathname} = useRouter();
     return( 
         <div className={styles.HeaderWrapper}>
             {backgroundImage &&  
-                <img src={backgroundImage} alt='universe' className={styles.HeaderImg} width='100%' height='auto' />
+                    <img src={backgroundImage} alt='universe' width='100%' height='100%' className={styles.HeaderImg} />
             }
             
                 

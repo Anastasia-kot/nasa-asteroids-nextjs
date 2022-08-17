@@ -1,14 +1,13 @@
-export const nameConverter = (name: string) => {
+export const nameConverter = (name: string): string => {
     name = name.split('(')[1];
     name = name.split(')')[0];
 
     return name;
 }
 
-export const distanceOrbitSuffix = (count: number) => {
-    let result = 'лунных орбит';
+export const distanceOrbitSuffix = (count: number): string => {
     if (count % 10 === 1 && count%100 !==11) {
-        result = 'лунная орбита';
+        return 'лунная орбита';
     }
     
     if ( 
@@ -16,11 +15,9 @@ export const distanceOrbitSuffix = (count: number) => {
         (count % 10 === 3 && count%100 !==13) || 
         (count % 10 === 4 && count%100 !==14) 
     ) {
-        result = 'лунные орбиты';
+        return 'лунные орбиты';
     }
     
-    
-
-    return result;
+    return 'лунных орбит';
 }
 

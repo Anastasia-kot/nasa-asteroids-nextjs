@@ -14,15 +14,18 @@
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    // "resolveJsonModule": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "helpers/dateConverters.js", "helpers/diameterConverters.js", "helpers/nameConverters.js"  ],
+    "**/*.tsx",
+    "helpers/dateConverters.ts",
+    "helpers/diameterConverters.ts",
+    "helpers/nameConverters.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

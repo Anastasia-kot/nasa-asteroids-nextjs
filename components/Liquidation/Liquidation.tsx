@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import ListItemLiquidation from "./ListItemLiquidation/ListItemLiquidation";
- import styles from './Liquidation.module.css';
+import styles from './Liquidation.module.css';
 
 
-const Liquidation = () => {
+const Liquidation:FC = ( ) => {
 
   let [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([]);
 
 
 try {
   for (let key in localStorage) {
-    // console.log(key)
-
     if (         (!localStorage.hasOwnProperty(key)) 
       && (typeof (+key) === "number")  
       && (!JSON.parse(localStorage.getItem(key)).hasOwnProperty('id'))
       )   {  continue;  // пропустит такие ключи, как "setItem", "getItem" и так далее
     }
  
-
-
-      asteroidsForLiquidation.push(JSON.parse(localStorage.getItem(key)));
+    asteroidsForLiquidation.push(JSON.parse(localStorage.getItem(key)));
     
   }
 
@@ -32,11 +28,10 @@ try {
 
 
 
-  console.log(asteroidsForLiquidation)
-    return (
+     return (
         <div className={styles.LiquidationWrapper}> 
-        <div className={styles.Liquidation}> 
-          <div className={styles.AsteroidsBlock}>
+          <div className={styles.Liquidation}> 
+            <div className={styles.AsteroidsBlock}>
               
         
               
@@ -44,7 +39,7 @@ try {
               {asteroidsForLiquidation.length > 0 
               ? (asteroidsForLiquidation.map(m =>
                 m.hasOwnProperty('id')
-                  ? <ListItemLiquidation {...m} key={m.id} />
+                  ? <ListItemLiquidation asteroid={m} key={m.id} />
                   : null
                 ))
                 : (<span>Список астероидов на уничтожение пуст</span>)

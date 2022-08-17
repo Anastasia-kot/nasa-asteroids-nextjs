@@ -1,5 +1,6 @@
-
+export type AsteroidListType = Array<AsteroidInListType>;
 export type close_approach_dataType = Array<close_approach_dateType>;
+
 export type close_approach_dateType = {
 
     close_approach_date:  string
@@ -22,7 +23,7 @@ export type AsteroidType = {
     absolute_magnitude_h: number;
     close_approach_data: close_approach_dataType;
     designation: string;
-    estimated_diameter: Object;
+    estimated_diameter: estimated_diameterType
     id: string;
     is_potentially_hazardous_asteroid: boolean;
     is_sentry_object: boolean;
@@ -36,10 +37,9 @@ export type AsteroidType = {
 
 
 export type AsteroidInListType = {
-
     absolute_magnitude_h: number;
     close_approach_data: close_approach_dataType;
-    estimated_diameter: Object;
+    estimated_diameter: estimated_diameterType
     id: string;
     is_potentially_hazardous_asteroid: boolean;
     is_sentry_object: boolean;
@@ -50,4 +50,31 @@ export type AsteroidInListType = {
 
 } 
 
-export type AsteroidListType = Array<AsteroidInListType>
+
+export type estimated_diameterType = {
+    "kilometers": {
+        "estimated_diameter_min": number,
+        "estimated_diameter_max": number
+    },
+    "meters": {
+        "estimated_diameter_min": number,
+        "estimated_diameter_max": number
+    },
+    "miles": {
+        "estimated_diameter_min": number,
+        "estimated_diameter_max": number
+    },
+    "feet": {
+        "estimated_diameter_min": number,
+        "estimated_diameter_max": number
+    }
+}
+
+
+
+
+
+
+
+
+export type MeasureUnitType = 'km' | 'orbit';

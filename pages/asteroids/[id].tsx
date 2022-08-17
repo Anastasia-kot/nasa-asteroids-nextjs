@@ -1,13 +1,11 @@
 // import '../styles/globals.css';
 import React, { useEffect, useState, FC } from 'react';
-import { useRouter } from "next/router";
-import Asteroid from '../../components/Asteroid/Asteroid.tsx';
+import { useRouter } from '../../node_modules/next/router';
+import Asteroid from '../../components/Asteroid/Asteroid';
 import { AsteroidType } from '../../types';
 
 
-
-
-export const getServerSideProps = async (context: { params: { id: any; }; } ) => {
+export const getServerSideProps = async (context: { params: { id: number; }; }) => {
     try {
         const { id } = context.params;
 
