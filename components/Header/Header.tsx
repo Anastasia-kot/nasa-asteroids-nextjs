@@ -46,7 +46,7 @@ const {pathname} = useRouter();
     return( 
         <div className={styles.HeaderWrapper}>
             {backgroundImage &&  
-                    <img src={backgroundImage} alt='universe' width='100%' height='100%' className={styles.HeaderImg} />
+                    <img src={backgroundImage} alt='universe' width='100%' height='auto' className={styles.HeaderImg} />
             }
             
                 
