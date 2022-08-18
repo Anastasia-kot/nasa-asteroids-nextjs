@@ -1,7 +1,8 @@
 import React, { useEffect, useState, FC, useRef } from "react";
-import { AsteroidListType, MeasureUnitType } from "../../types";
-import ListItem from "./ListItem/ListItem";
 import styles from './Main.module.css';
+import { AsteroidListType, MeasureUnitType } from "../../types";
+import Preloader from "../Preloader/Preloader";
+import AsteroidCard from "../utils/AsteroidCard/AsteroidCard";
 
 
 
@@ -19,13 +20,11 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
     })
 
     const handleScroll = () => {
-        // if ( window.scrollY  > 300){
-        //     loadMore()
-        // }
-
-     }
-
-
+        if (!isFetchingStatus) {
+            setIsFetchingStatus(true)
+            loadMore()
+    }
+    }
 
 
 
@@ -36,13 +35,17 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
 
 
 
+
+// sorting parameters
     let [measureUnit, setMeasureUnit] = useState('km'as MeasureUnitType);
     let [isDangerFlag, setIsDangerFlag] = useState(false as boolean);
 
 
 
+// load more logic
     let [scrollDate, setScrollDate] = useState(new Date());
-    let [asteroidsListState, setAsteroidsListState] = useState(asteroidsList);
+    let [asteroidsListState, setAsteroidsListState] = useState(asteroidsList as AsteroidListType);
+    let [isFetchingStatus, setIsFetchingStatus] = useState(false as boolean);
 
     let loadMore = async () => {
          
@@ -55,11 +58,8 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
             return { notFound: true }
         } 
        
-            setAsteroidsListState([...asteroidsListState, ...data.near_earth_objects[dateToString] ])
-
-        
-       
-
+        setAsteroidsListState([...asteroidsListState, ...data.near_earth_objects[dateToString] ])
+        setIsFetchingStatus(false)
     }
     
  
@@ -100,18 +100,15 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
                     {!!asteroidsListState && (asteroidsListState.length > 0) && 
                         asteroidsListState.map(m => 
                             isDangerFlag 
-                            ? (m.is_potentially_hazardous_asteroid) && <ListItem asteroid={m} measureUnit={measureUnit} key={m.id} />
-                            : <ListItem asteroid={m}  measureUnit={measureUnit} key={m.id} />
+                            ? (m.is_potentially_hazardous_asteroid) && <AsteroidCard asteroid={m} measureUnit={measureUnit} key={m.id} isInLiquidation={false}/>
+                            : <AsteroidCard asteroid={m}  measureUnit={measureUnit} key={m.id} isInLiquidation={false}/>
 
                         )
                     }
                 </div>
 
-                <button 
-                    onClick={() => loadMore()}
-                    className={styles.LoadButton}>
-                        Загрузить еще
-                </button>
+                {isFetchingStatus && <Preloader/>  }
+               
            
             </div>
         </div>

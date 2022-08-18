@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react";
-import ListItemLiquidation from "./ListItemLiquidation/ListItemLiquidation";
 import styles from './Liquidation.module.css';
+import AsteroidCard from "../utils/AsteroidCard/AsteroidCard";
 
 
 const Liquidation:FC = ( ) => {
 
-  let [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([]);
+let [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([]);
 
 
 try {
@@ -26,41 +26,42 @@ try {
 
 
 
+  return (
+    <div className={styles.LiquidationWrapper}>
+      <div className={styles.Liquidation}>
 
-     return (
-        <div className={styles.LiquidationWrapper}> 
-          <div className={styles.Liquidation}> 
-            
-              
-        
-              
-              
-              {asteroidsForLiquidation.length > 0 
-                ? <div className={styles.AsteroidsBlock}> {asteroidsForLiquidation.map(m =>
-                m.hasOwnProperty('id')
-                  ? <ListItemLiquidation asteroid={m} key={m.id} />
-                  : null
-               )}  </div>
-                : (<>
-                      <h1 className={styles.Header}> Список астероидов на уничтожение пуст</h1>
-                      <div className={styles.HeaderLine}> </div>   
-                  </>)
-                
-              }
-        
+        {asteroidsForLiquidation.length > 0
+          ?<>
+            <h1 className={styles.Header}> Заказать уничтожение астероидов</h1>
+            <div className={styles.HeaderLine}> </div>
+            <p>Заказать бригаду имени Брюса Уиллиса для уничтожения выбранных астероидов</p>
 
-          {asteroidsForLiquidation.length > 0 && <button 
-          className={styles.AsteroidLiquidate}
-          onClick={() => { 
-            window.localStorage.clear(); 
-            setAsteroidsForLiquidation([]) 
-            alert('Бригада имени Брюса Уиллиса выехала на уничтожение') 
-          }}>
-            Заказать уничтожение
-        </button>}
+            <button
+              className={styles.AsteroidLiquidate}
+              onClick={() => {
+                window.localStorage.clear();
+                setAsteroidsForLiquidation([])
+                alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
+              }}>
+              Уничтожить
+            </button>
 
-        </div>
-        </div>
+
+            <div className={styles.AsteroidsBlock}> {asteroidsForLiquidation.map(m =>
+              m.hasOwnProperty('id')
+                ? <AsteroidCard asteroid={m} key={m.id} measureUnit={'km'} isInLiquidation={true} />
+                : null
+            )}  </div>
+          </>
+
+          : <>
+            <h1 className={styles.Header}> Список астероидов на уничтожение пуст</h1>
+            <div className={styles.HeaderLine}> </div>
+          </>
+        }
+
+      </div>
+    </div>
     )
 }
 

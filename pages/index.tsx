@@ -30,44 +30,11 @@ export const getStaticProps = async () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 type PropsType = {
   asteroidsList: AsteroidListType
 }
 
 const Home: FC<PropsType> = ({ asteroidsList }) => {
-
-
 
 
   return (

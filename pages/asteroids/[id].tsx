@@ -1,8 +1,9 @@
 // import '../styles/globals.css';
-import React, { useEffect, useState, FC } from 'react';
+import React, { useEffect, FC } from 'react';
 import { useRouter } from '../../node_modules/next/router';
 import Asteroid from '../../components/Asteroid/Asteroid';
 import { AsteroidType } from '../../types';
+import Preloader from '../../components/Preloader/Preloader';
 
 
 export const getServerSideProps = async (context: { params: { id: number; }; }) => {
@@ -61,8 +62,6 @@ const ListCard: FC<PropsType> = ({ asteroidInfo }) => {
             )
         }
     }, [router])
-
-
 
     return ( <Asteroid asteroidInfo={asteroidInfo} />  )
 }

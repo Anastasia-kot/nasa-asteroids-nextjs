@@ -6,9 +6,9 @@
     align-items: flex-start;
     padding: 0px;
     gap: 8px;
- }
+}
 
-.NavLink{
+.NavLink {
     color: inherit;
     text-decoration: none;
 }
@@ -22,7 +22,7 @@
     text-align: left;
 }
 
-.AsteroidBlock{
+.AsteroidBlock {
     display: flex;
     align-items: flex-start;
     gap: 11px;
@@ -31,12 +31,13 @@
 
 .ImageBlock {
     height: 95px;
-    width: 93px;   
+    width: 93px;
     border-radius: 16px;
     display: block;
     position: relative;
-            overflow: hidden;
+    overflow: hidden;
 }
+
 .dino {
     position: absolute;
     width: 30px;
@@ -51,26 +52,29 @@
     display: block;
 }
 
-    
+
 .ImageBlockPositive {
     background: linear-gradient(90deg, #CFF37D 0%, #7DE88C 100%);
 }
-.ImageBlockPositive .asteroid{
+
+.ImageBlockPositive .asteroid {
     width: 15px;
     height: 15px;
     left: 10px;
     top: 9px;
     transform: matrix(0.98, -0.21, 0.21, 0.98, 0, 0);
 }
+
 .ImageBlockNegative {
     background: linear-gradient(90deg, #FFB199 0%, #FF0844 100%);
 }
+
 .ImageBlockNegative .asteroid {
-        left: -30px;
-        top: -50px;
-    }
-        
- 
+    left: -30px;
+    top: -50px;
+}
+
+
 
 
 
@@ -100,13 +104,13 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
-    
+
     width: 184px;
     height: 96px;
-    
-    
+
+
     /* Inside auto layout */
-    
+
     flex: none;
     order: 1;
     flex-grow: 1;
@@ -117,20 +121,14 @@
 
 }
 
-.AsteroidDiameter {
+.AsteroidDiameter {}
 
-}
+.AsteroidDistance {}
 
-.AsteroidDistance {
-
-}
-
-.AsteroidIsDanger { 
-
-}
+.AsteroidIsDanger {}
 
 .AsteroidLiquidate {
-/* Auto layout */
+    /* Auto layout */
 
     /* display: flex;
     flex-direction: row;
@@ -146,31 +144,31 @@
     background: #186DD6;
     border-radius: 24px;
 
- 
 
 
-        /* Text */
-        
-        
-            /* width: 88px; */
-            /* height: 20px; */
-        
-            font-family: 'Helvetica';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 11px;
-            line-height: 20px;
-            /* identical to box height, or 182% */
-        
-             display: flex;
-            align-items: center;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        
-            /* White Base */
-        
-            color: #FFFFFF;
-        
-        
+
+    /* Text */
+
+
+    /* width: 88px; */
+    /* height: 20px; */
+
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 20px;
+    /* identical to box height, or 182% */
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    /* White Base */
+
+    color: #FFFFFF;
+
+
 
 }

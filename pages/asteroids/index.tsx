@@ -1,5 +1,5 @@
 // import '../styles/globals.css';
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import Main from '../../components/Main/Main'
 import Document from '../../node_modules/next/document';
 import { AsteroidListType } from '../../types';

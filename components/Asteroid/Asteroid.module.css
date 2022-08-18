@@ -6,7 +6,7 @@
     margin: 0 auto;
     max-width: 1000px;
     min-width: 362px;
-    padding: 16px 30px;
+    padding: 16px 60px;
 }
 
 .ListItem {
@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
  
@@ -144,7 +144,7 @@
     margin-bottom: 20px;
 }
 .close_approach_container {
-    width:169px
+    width:180px
 }
 .spidometr{
         height: 18px;
