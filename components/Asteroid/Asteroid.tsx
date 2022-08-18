@@ -97,7 +97,7 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
                     <button 
                     onClick={ ()=>{
                         let serialObj = JSON.stringify(asteroidInfo); //сериализуем его
-                        localStorage.setItem(asteroidInfo.id, serialObj); //запишем его в хранилище по ключу "myKey"
+                        window.localStorage.setItem(asteroidInfo.id, serialObj); //запишем его в хранилище по ключу "myKey"
                     }}
                         className={styles.AsteroidLiquidate}>
                         Уничтожить

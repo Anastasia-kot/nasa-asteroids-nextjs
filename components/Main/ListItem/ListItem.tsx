@@ -86,7 +86,7 @@ const ListItem: FC<PropsType> = ({asteroid, measureUnit, key}) => {
 
                 <button className={styles.AsteroidLiquidate} onClick={()=>{
                         let serialObj = JSON.stringify(asteroid); //сериализуем его
-                        localStorage.setItem(asteroid.id, serialObj); //запишем его в хранилище по ключу "myKey"
+                        window.localStorage.setItem(asteroid.id, serialObj); //запишем его в хранилище по ключу "myKey"
                 }}>
                     Уничтожить
                 </button>

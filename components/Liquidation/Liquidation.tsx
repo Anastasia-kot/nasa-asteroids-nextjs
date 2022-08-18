@@ -9,14 +9,14 @@ const Liquidation:FC = ( ) => {
 
 
 try {
-  for (let key in localStorage) {
-    if (         (!localStorage.hasOwnProperty(key)) 
+  for (let key in window.localStorage) {
+    if ((!window.localStorage.hasOwnProperty(key)) 
       && (typeof (+key) === "number")  
-      && (!JSON.parse(localStorage.getItem(key)).hasOwnProperty('id'))
+      && (!JSON.parse(window.localStorage.getItem(key)).hasOwnProperty('id'))
       )   {  continue;  // пропустит такие ключи, как "setItem", "getItem" и так далее
     }
  
-    asteroidsForLiquidation.push(JSON.parse(localStorage.getItem(key)));
+    asteroidsForLiquidation.push(JSON.parse(window.localStorage.getItem(key)));
     
   }
 
@@ -26,7 +26,6 @@ try {
 
 
 
-  console.log(localStorage)
 
      return (
         <div className={styles.LiquidationWrapper}> 
@@ -53,7 +52,7 @@ try {
           {asteroidsForLiquidation.length > 0 && <button 
           className={styles.AsteroidLiquidate}
           onClick={() => { 
-            localStorage.clear(); 
+            window.localStorage.clear(); 
             setAsteroidsForLiquidation([]) 
             alert('Бригада имени Брюса Уиллиса выехала на уничтожение') 
           }}>
