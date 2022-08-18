@@ -19,9 +19,9 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
     })
 
     const handleScroll = () => {
-        if ( window.scrollY  > 300){
-            loadMore()
-        }
+        // if ( window.scrollY  > 300){
+        //     loadMore()
+        // }
 
      }
 
