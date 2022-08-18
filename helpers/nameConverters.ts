@@ -21,3 +21,29 @@ export const distanceOrbitSuffix = (count: number): string => {
     return 'лунных орбит';
 }
 
+
+
+
+
+
+
+
+
+
+ 
+export const planetConverter = (planet: string): string => {
+     switch (planet) {
+        case 'Earth': return 'Земля'; break;
+        case 'Sun': return 'Солнце'; break;
+        case 'Merc': return 'Меркурий'; break;
+        case 'Venus': return 'Венера'; break;
+        case 'Mars': return 'Марс'; break;
+        case 'Jupiter': return 'Юпитер'; break;
+        case 'Saturn': return 'Сатурн'; break;
+        case 'Uranus': return 'Уран'; break;
+        case 'Neptune': return 'Нептун'; break;
+        default: return planet; break; break;
+    };
+}
+
+

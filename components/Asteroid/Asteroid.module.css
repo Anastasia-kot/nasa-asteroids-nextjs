@@ -1,18 +1,20 @@
-.ListItemWrapper {
+.AsteroidWrapper {
     width: 100%;
 }
 
-
-.ListItem {
+.Asteroid {
     margin: 0 auto;
     max-width: 1000px;
     min-width: 362px;
     padding: 16px 30px;
+}
 
+.ListItem {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    margin-bottom: 20px;
 }
 
  
@@ -78,12 +80,49 @@
 }
 
 .ImageBlockNegative .asteroid {
-    height: 200px;
-    width: 200px;
-    left: -10px;
-    top: -10px;
+    left: -30px;
+    top: -50px;
+
+}
 
 
+.Header {
+    margin-top: 24px;
+    /* Ближайшие подлёты */
+
+
+    /* width: 288px; */
+    width: 100%;
+    height: 28px;
+
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    /* identical to box height */
+
+
+    /* Black */
+
+    color: #000000;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.HeaderLine {
+    /* content: ''; */
+    border-top: 1px solid #D7D7D7;
+    height: 0px;
+    display: block;
+    /* width: 100%; */
+    margin: 8px 0;
+    margin-right: 30px;
 
 }
 
@@ -97,15 +136,22 @@
 
 
 
-
-
-
-
-
-
-
-
-
+.close_approach_dataContainer {
+    display: flex;
+    flex-wrap:wrap;
+    gap: 16px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.close_approach_container {
+    width:169px
+}
+.spidometr{
+        height: 18px;
+        display: inline;
+        vertical-align: middle;
+       
+}
 
 
 

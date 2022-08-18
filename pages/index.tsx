@@ -2,7 +2,7 @@ import styles from '../styles/Home.module.css'
 import Main from '../components/Main/Main'
 import { useRouter } from '../node_modules/next/router';
 // import { useRouter } from "next/router";
-import { useEffect, FC } from 'react';
+import { useEffect, FC, useRef } from 'react';
 import { AsteroidListType } from '../types';
 
 
@@ -16,10 +16,49 @@ export const getStaticProps = async () => {
     return { notFound: true }
   }
 
+  
+
+  if (!data.near_earth_objects || !data.near_earth_objects[dateToString]) {
+    return {
+      props: { asteroidsList:[] }
+    }
+  }
   return {
     props: { asteroidsList: data.near_earth_objects[dateToString] }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 type PropsType = {
@@ -27,7 +66,13 @@ type PropsType = {
 }
 
 const Home: FC<PropsType> = ({ asteroidsList }) => {
-  return (<Main asteroidsList={asteroidsList} />)
+
+
+
+
+  return (
+    <Main asteroidsList={asteroidsList} />
+  )
 }
 
 

@@ -7,10 +7,10 @@ import Link from "../../../node_modules/next/link";
 import Image from "../../../node_modules/next/image";
 // import Image from "next/image";
 
-const dinoImg = require('./../../../public/img/dino.svg');
-const asteroidImg = require('./../../../public/img/asteroid.svg');
-// import  dino  from './../../../public/img/dino.svg';
-// import  asteroid  from './../../../public/img/asteroid.svg';
+const dinoImg = require('./../../../public/img/dinoImg.svg');
+const asteroidImg = require('./../../../public/img/asteroidImg.svg');
+// import  dinoImg  from './../../../public/img/dinoImg.svg';
+// import asteroidImg from './../../../public/img/asteroidImg.png';
 import { dateConverter } from "../../../helpers/dateConverters";
 import { nameConverter, distanceOrbitSuffix } from "../../../helpers/nameConverters";
 import { diameterConverter } from "../../../helpers/diameterConverters";
@@ -30,7 +30,6 @@ type PropsType = {
 
 
 const ListItem: FC<PropsType> = ({asteroid, measureUnit, key}) => {
-    console.log(asteroid)
     return (
             <div className={styles.ListItem}>
               
@@ -51,8 +50,8 @@ const ListItem: FC<PropsType> = ({asteroid, measureUnit, key}) => {
                         <div className={styles.dino}>
                             <Image src={dinoImg} alt='dino' />
                         </div>
-                        <div className={styles.asteroid} >
-                            <Image src={asteroidImg} alt='asteroid'  />
+                        <div className={styles.asteroid}>
+                            <Image src={asteroidImg} alt='asteroid' height= '100px' width='100px' />
                         </div>
                     </div>
                     <div className={styles.AsteroidInfoBlock}>

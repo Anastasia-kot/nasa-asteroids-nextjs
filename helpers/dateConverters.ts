@@ -1,7 +1,7 @@
 import { close_approach_dateType } from "../types";
 
 export const dateConverter = (date: string): string => {
-    let day = date.split('-')[2];
+    let day = (+date.split('-')[2])%100;
     let month = date.split('-')[1];
     switch (month) {
         case '01': month = 'января'; break;
@@ -36,22 +36,17 @@ export const dateConverter = (date: string): string => {
 
 export const dateCloserFinder = (dates: Array<close_approach_dateType>):string => {    
     
+    let datesArray = dates.map(d => { return (new Date(d.close_approach_date)) });
+
     let now = new Date(); 
     now.setHours(0, 0, 0, 0);
+    let closeDate: Date;
 
-    let closeDate; 
-    // = new Date( dates[0].close_approach_date);
-    
- 
+    for (let i = 0; datesArray.length >= i; i++) {
+        closeDate = datesArray[i]
+        if (closeDate >= now) {break}
+    }
 
-        let i = 0;
-        do {
-            closeDate = new Date(dates[i].close_approach_date)
-            
-            // .setFullYear( dates[i].close_approach_date.split('-')[0], dates[i].close_approach_date.split('-')[1], dates[i].close_approach_date.split('-')[2]);
-            i++;
-        } while ((closeDate < now) && (dates.length >= i)) 
-    
      return closeDate.toISOString().split('T')[0];;
 }
 

@@ -2,19 +2,12 @@ export type AsteroidListType = Array<AsteroidInListType>;
 export type close_approach_dataType = Array<close_approach_dateType>;
 
 export type close_approach_dateType = {
-
     close_approach_date:  string
     close_approach_date_full: string
     epoch_date_close_approach: number  
-    miss_distance: {
-        astronomical: string, 
-        lunar: string, 
-        kilometers: string, 
-        miles: string 
-    }
+    miss_distance: miss_distanceType
     orbiting_body: string
-    relative_velocity: Object
-
+    relative_velocity: relative_velocityType
 }
 
 
@@ -70,7 +63,19 @@ export type estimated_diameterType = {
     }
 }
 
+export type relative_velocityType = {
+    'kilometers_per_hour': string
+    'kilometers_per_second': string
+    'miles_per_hour': string
+}
 
+
+export type miss_distanceType = {
+    'astronomical': string,
+    'lunar': string,
+    'kilometers': string,
+    'miles': string
+}
 
 
 

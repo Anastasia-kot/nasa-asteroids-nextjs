@@ -26,26 +26,29 @@ try {
 
 
 
-
+  console.log(localStorage)
 
      return (
         <div className={styles.LiquidationWrapper}> 
           <div className={styles.Liquidation}> 
-            <div className={styles.AsteroidsBlock}>
+            
               
         
               
               
               {asteroidsForLiquidation.length > 0 
-              ? (asteroidsForLiquidation.map(m =>
+                ? <div className={styles.AsteroidsBlock}> {asteroidsForLiquidation.map(m =>
                 m.hasOwnProperty('id')
                   ? <ListItemLiquidation asteroid={m} key={m.id} />
                   : null
-                ))
-                : (<span>Список астероидов на уничтожение пуст</span>)
+               )}  </div>
+                : (<>
+                      <h1 className={styles.Header}> Список астероидов на уничтожение пуст</h1>
+                      <div className={styles.HeaderLine}> </div>   
+                  </>)
                 
               }
-          </div>
+        
 
           {asteroidsForLiquidation.length > 0 && <button 
           className={styles.AsteroidLiquidate}
@@ -54,7 +57,7 @@ try {
             setAsteroidsForLiquidation([]) 
             alert('Бригада имени Брюса Уиллиса выехала на уничтожение') 
           }}>
-            Ликвидировать
+            Заказать уничтожение
         </button>}
 
         </div>

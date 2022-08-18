@@ -65,14 +65,9 @@
     background: linear-gradient(90deg, #FFB199 0%, #FF0844 100%);
 }
 .ImageBlockNegative .asteroid {
-        height: 200px;
-        width: 200px;
-        left: -10px;
-        top: -10px;
-                    
- 
-      
-    }
+        left: -30px;
+        top: -50px;
+}
         
  
 

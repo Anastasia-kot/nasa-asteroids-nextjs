@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from './Header.module.css';
 import Link from "../../node_modules/next/link";
 import { useRouter } from "../../node_modules/next/router";
-// import Image from "../../node_modules/next/image";
+import Image from "../../node_modules/next/image";
  
 
 
@@ -30,23 +30,97 @@ import { useRouter } from "../../node_modules/next/router";
 
 const Header = () => {
 
+
+    // let getImage = async (date: Date) => {
+    //     let dateToString = date.toISOString().split('T')[0];
+    //     const resp = await fetch(`https://api.nasa.gov/planetary/apod?
+    //             start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`)
+    //     const data = await resp.json();
+    //     console.log(data)
+    //     return data
+    // }
+
+    // let [backgroundImage, setBackgroundImage] = useState(null);
+    // // let [backgroundImageType, setBackgroundImageType] = useState(null);
+
+
+    // useEffect(() => { 
+    //     let date = new Date();
+    //     getImage(date)
+    //     .then (        setBackgroundImage(date[0].url)      )
+
+
+    // },[])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // let [backgroundImage, setBackgroundImage] = useState(null);
+    // let [backgroundImageType, setBackgroundImageType] = useState(null);
+
+    // let getImage =  (date: Date) => {
+    //     let dateToString = date.toISOString().split('T')[0];
+    //     return fetch(`https://api.nasa.gov/planetary/apod?
+    //             start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`)
+    //         .then(response => response.json())
+    //         .then(commits => {
+    //             setBackgroundImage(commits[0].url);
+    //             setBackgroundImageType(commits[0].media_type);
+    //             return backgroundImageType
+    //         })
+    // }
+
+    // let date = new Date();
+    // while (backgroundImageType != 'image') {
+    //     getImage(date);
+
+    // }
+
+
+
+
+
+
+
+
+
+
+
     let [backgroundImage, setBackgroundImage] = useState(null);
 
-     useEffect(    ()=> { 
-        
-         fetch('https://api.nasa.gov/planetary/apod?start_date=2022-08-16&end_date=2022-08-16&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW')
+    useEffect(() => {
+        let dateToString = new Date().toISOString().split('T')[0];
+        fetch(`https://api.nasa.gov/planetary/apod?start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`)
             .then(response => response.json())
             .then(commits => {
-                    setBackgroundImage(commits[0].url);
-            });
-    }, [] )
+                setBackgroundImage(commits[0].url);
+             });
+    }, [])
+
+
+
 
 const {pathname} = useRouter(); 
+
+
 
     return( 
         <div className={styles.HeaderWrapper}>
             {backgroundImage &&  
-                    <img src={backgroundImage} alt='universe' width='100%' height='auto' className={styles.HeaderImg} />
+                    <img className={styles.HeaderImg} src={backgroundImage} alt='universe' width='100%' height='auto'  /> 
             }
             
                 

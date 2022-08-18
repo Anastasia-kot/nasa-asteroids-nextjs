@@ -1,7 +1,10 @@
-import React, { useEffect, useState, FC } from "react";
+import React, { useEffect, useState, FC, useRef } from "react";
 import { AsteroidListType, MeasureUnitType } from "../../types";
 import ListItem from "./ListItem/ListItem";
 import styles from './Main.module.css';
+
+
+
 
 type PropsType = {
     asteroidsList: AsteroidListType
@@ -9,28 +12,57 @@ type PropsType = {
 
 const Main: FC<PropsType> = ({asteroidsList}) => {
 
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    })
+
+    const handleScroll = () => {
+        if ( window.scrollY  > 300){
+            loadMore()
+        }
+
+     }
+
+
+
+
+
+
+
+
+
+
+
+
     let [measureUnit, setMeasureUnit] = useState('km'as MeasureUnitType);
     let [isDangerFlag, setIsDangerFlag] = useState(false as boolean);
 
 
 
-    // let [date, setDate] = useState(new Date());
+    let [scrollDate, setScrollDate] = useState(new Date());
+    let [asteroidsListState, setAsteroidsListState] = useState(asteroidsList);
 
-    // let [asteroidsList, setAsteroidsList] = useState([]);
+    let loadMore = async () => {
+         
+        scrollDate.setDate(scrollDate.getDate() + 1);
+        let dateToString = scrollDate.toISOString().split('T')[0];
+        const resp = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`);
+        const data = await resp.json();
 
-    // useEffect(() => {
-    //     let dateToString = date.toISOString().split('T')[0];
-    //     fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`)
-    //         .then(response => response.json())
-    //         .then(commits => {
-    //             let newPortion = commits.near_earth_objects[dateToString] ;
-    //             setAsteroidsList(newPortion)
+        if (!data) {
+            return { notFound: true }
+        } 
+       
+            setAsteroidsListState([...asteroidsListState, ...data.near_earth_objects[dateToString] ])
 
-    //             // setAsteroidsList([...asteroidsList, ...newPortion])
-    //             // setDate(date.getDate() + 1)
-    //         });
-    // }, [date])
+        
+       
 
+    }
+    
+ 
 
 
  
@@ -65,8 +97,8 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
                     </label>
                 </div>
                 <div className={styles.AsteroidsBlock}>
-                    {!!asteroidsList && (asteroidsList.length > 0) && 
-                        asteroidsList.map(m => 
+                    {!!asteroidsListState && (asteroidsListState.length > 0) && 
+                        asteroidsListState.map(m => 
                             isDangerFlag 
                             ? (m.is_potentially_hazardous_asteroid) && <ListItem asteroid={m} measureUnit={measureUnit} key={m.id} />
                             : <ListItem asteroid={m}  measureUnit={measureUnit} key={m.id} />
@@ -74,6 +106,12 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
                         )
                     }
                 </div>
+
+                <button 
+                    onClick={() => loadMore()}
+                    className={styles.LoadButton}>
+                        Загрузить еще
+                </button>
            
             </div>
         </div>

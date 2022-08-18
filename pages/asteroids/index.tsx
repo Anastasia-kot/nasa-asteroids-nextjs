@@ -1,6 +1,7 @@
 // import '../styles/globals.css';
 import { FC, useEffect, useState } from 'react'
 import Main from '../../components/Main/Main'
+import Document from '../../node_modules/next/document';
 import { AsteroidListType } from '../../types';
 
 export const getStaticProps = async () => {
@@ -13,6 +14,12 @@ export const getStaticProps = async () => {
         return {notFound:true}
     }
 
+
+    if (!data.near_earth_objects || !data.near_earth_objects[dateToString]) {
+        return {
+            props: { asteroidsList: [] }
+        }
+    }
     return {
         props: { asteroidsList: data.near_earth_objects[dateToString] }
     }
@@ -24,6 +31,11 @@ type PropsType = {
 }
 
 const Asteroids: FC<PropsType> = ({asteroidsList}) =>  {
+    
+ 
+
+
+
     return (  <Main asteroidsList={asteroidsList}/>    )
 }
 
