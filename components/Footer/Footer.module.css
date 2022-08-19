@@ -1,19 +1,30 @@
 .Footer{
     width: 100% ;
 }
+@media (min-width: 321px) {
+    .Footer {
+        margin: 0 30px;
+    }
+}
+
+@media (max-width: 320px) {
+    .Footer {
+        margin: 0 16px;
+    }
+}
+
 
 
 .Copyright {
         margin: 0 auto;
         max-width: 1000px;
         min-width: 362px;
-        padding: 16px 30px;
-
+        padding: 16px 0;
         margin-top: 50px;
         
 
 
-     font-family: Helvetica;
+    font-family: Helvetica;
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;

@@ -24,14 +24,9 @@ export const dateConverter = (date: string): string => {
     return newDate;
 }
 
-
-
-// export const dateToYesterday = (date: string) => {
-//     let day = +date.split('-')[2] - 2 ;
-//     let newDate = date.split(-1)[0] + '-' + day;
-//     return newDate;
-// }
-
+export const dateToISOString = (date: Date): string => {
+    return date.toISOString().split('T')[0];
+}
 
 
 export const dateCloserFinder = (dates: Array<close_approach_dateType>):string => {    
@@ -47,7 +42,7 @@ export const dateCloserFinder = (dates: Array<close_approach_dateType>):string =
         if (closeDate >= now) {break}
     }
 
-     return closeDate.toISOString().split('T')[0];;
+    return dateToISOString(closeDate);
 }
 
 

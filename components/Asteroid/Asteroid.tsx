@@ -1,14 +1,13 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import classNames from '../../node_modules/classnames/index';
 import styles from './Asteroid.module.css';
-import Image from '../../node_modules/next/image';
 const dinoImg = require('./../../public/img/dinoImg.svg');
 const asteroidImg = require('./../../public/img/asteroidImg.svg');
-import { dateConverter, dateCloserFinder } from "./../../helpers/dateConverters";
-import { nameConverter, planetConverter } from "./../../helpers/nameConverters";
-import { diameterConverter } from "./../../helpers/diameterConverters";
+import { dateConverter } from "./../../helpers/dateConverters";
+import { planetConverter } from "./../../helpers/nameConverters";
 import { AsteroidType } from '../../types';
 import AsteroidCard from '../utils/AsteroidCard/AsteroidCard';
+// import { getLiquidationListKeys } from '../../helpers/localStorageFunctions';
 
 
   
@@ -18,9 +17,17 @@ type PropsType = {
 
 const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
     
+    // info block about closeApproach dates
     let [closeApproachPortion, setCloseApproachPortion] = useState(0 as number);
 
-    
+
+    // liquidation info
+
+    // let [isInLiquidationList, setIsInLiquidationList] = useState(false as boolean);
+    // useEffect(() => {
+    //    setIsInLiquidationList ( getLiquidationListKeys().includes(asteroidInfo.id)   )
+    // },[])
+
   
     if (asteroidInfo.id == '0')  {      
         return (
@@ -38,7 +45,12 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
     <div className={styles.AsteroidWrapper}> 
     <div className={styles.Asteroid}>
         <div className={styles.ListItem}>              
-            <AsteroidCard asteroid={asteroidInfo} measureUnit={'km'} key={asteroidInfo.id} isInLiquidation={false}/>
+                    <AsteroidCard 
+                        asteroid={asteroidInfo} 
+                        measureUnit={'km'} 
+                        key={asteroidInfo.id} 
+                        isInLiquidationPage={false} 
+                        isInLiquidationList={false} />
         </div>
 
     {asteroidInfo.close_approach_data.length > 1 && (

@@ -4,30 +4,47 @@
     overflow: hidden;
     position: relative;
     width: 100%;
- 
 }
 
-.HeaderImg{
+.HeaderImg {
     position: absolute;
     z-index: 0;
     width: 100%;
     background-color: black;
- }
+}
 
 .Header {
     margin: 0 auto;
     max-width: 1000px;
     min-width: 362px;
-    padding: 16px  30px;
-    
+    padding: 16px 0;
+
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     margin-bottom: 16px;
     z-index: 1;
     position: relative;
-    text-shadow:  10px 10px 20px rgb(0, 0, 0), -10px -10px 20px rgb(0, 0, 0),10px -10px 20px rgb(0, 0, 0),-10px 10px 20px rgb(0, 0, 0) ;
+    text-shadow: 10px 10px 20px rgb(0, 0, 0), 
+                -10px -10px 20px rgb(0, 0, 0), 
+                10px -10px 20px rgb(0, 0, 0), 
+                -10px 10px 20px rgb(0, 0, 0);
 }
+
+@media (min-width: 321px) {
+    .Header {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media (max-width: 320px) {
+    .Header {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
 
 .CompanyInfoWrapper {
     display: flex;
@@ -47,7 +64,7 @@
     text-transform: uppercase;
 
     margin-bottom: 8px;
-    white-space:  nowrap ;
+    white-space: nowrap;
 }
 
 .CompanyAbout {

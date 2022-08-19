@@ -1,11 +1,10 @@
 .dino {
-
     margin: 0 auto;
     color: #fff;
     font-size: 1.5em;
     text-align: center;
     padding: 10px;
-    animation: 3s linear infinite rotate;
+    animation: 0.7s linear infinite rotate;
 }
 
 @keyframes rotate {

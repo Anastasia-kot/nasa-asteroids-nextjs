@@ -1,13 +1,25 @@
-.LiquidationWrapper{
+.LiquidationWrapper {
     width: 100%;
-        background-color: rgb(255, 255, 255);
-        margin-top: 0;
+    background-color: rgb(255, 255, 255);
+    margin-top: 0;
+
 }
+@media (min-width: 321px) {
+    .LiquidationWrapper {
+        margin: 0 30px;
+    }
+}
+@media (max-width: 320px) {
+    .LiquidationWrapper {
+        margin: 0 16px;
+    }
+}
+
 .Liquidation {
     margin: 0 auto;
     max-width: 1000px;
     min-width: 362px;
-    padding: 16px 50px;
+    padding: 16px 0;
 }
 
 
@@ -66,21 +78,21 @@
 
 
 
- .AsteroidLiquidate {
-     margin-top: 20px;
-     margin-bottom: 40px;
-     padding: 2px 11px;
-     height: 24px;
-     background: #186DD6;
-     border-radius: 24px;
-     font-family: 'Helvetica';
-     font-style: normal;
-     font-weight: 700;
-     font-size: 11px;
-     line-height: 20px;
-     display: flex;
-     align-items: center;
-     letter-spacing: 1px;
-     text-transform: uppercase;
-     color: #FFFFFF;
- }
+.AsteroidLiquidate {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding: 2px 11px;
+    height: 24px;
+    background: #186DD6;
+    border-radius: 24px;
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}

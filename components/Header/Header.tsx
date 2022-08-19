@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-// import { dateToYesterday } from "../../helpers/dateConverters.ts";
+import React, { useEffect, useState } from "react";
 import styles from './Header.module.css';
 import Link from "../../node_modules/next/link";
 import { useRouter } from "../../node_modules/next/router";
-import Image from "../../node_modules/next/image";
+import { dateToISOString } from "../../helpers/dateConverters";
  
 
 
@@ -102,8 +101,8 @@ const Header = () => {
     let [backgroundImage, setBackgroundImage] = useState(null);
 
     useEffect(() => {
-        let dateToString = new Date().toISOString().split('T')[0];
-        fetch(`https://api.nasa.gov/planetary/apod?start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`)
+        let date = dateToISOString(new Date()) 
+        fetch(`https://api.nasa.gov/planetary/apod?start_date=${date}&end_date=${date}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`)
             .then(response => response.json())
             .then(commits => {
                 setBackgroundImage(commits[0].url);
@@ -120,11 +119,9 @@ const {pathname} = useRouter();
     return( 
         <div className={styles.HeaderWrapper}>
             {backgroundImage &&  
-                    <img className={styles.HeaderImg} src={backgroundImage} alt='universe' width='100%' height='auto'  /> 
+                <img className={styles.HeaderImg} src={backgroundImage} alt='universe' width='100%' height='auto'  /> 
             }
-            
-                
- 
+             
         <div className={styles.Header}>
             <div className={styles.CompanyInfoWrapper}>
                 <div className={styles.CompanyName}>Armageddon v2</div>

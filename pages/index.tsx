@@ -1,14 +1,14 @@
 import styles from '../styles/Home.module.css'
 import Main from '../components/Main/Main'
 import { useRouter } from '../node_modules/next/router';
-// import { useRouter } from "next/router";
 import { useEffect, FC, useRef } from 'react';
 import { AsteroidListType } from '../types';
+import { dateToISOString } from '../helpers/dateConverters';
 
 
 export const getStaticProps = async () => {
-  let dateToString = (new Date()).toISOString().split('T')[0];
-  const resp = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?
+  let dateToString = dateToISOString(new Date())
+    const resp = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?
                 start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`);
   const data = await resp.json();
 

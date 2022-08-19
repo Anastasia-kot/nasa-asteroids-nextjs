@@ -1,19 +1,27 @@
-import React, { useEffect, useState, FC, useRef } from "react";
+import React, { useEffect, useState, FC } from "react";
 import styles from './Main.module.css';
-import { AsteroidListType, MeasureUnitType } from "../../types";
+import { AsteroidInListType, AsteroidListType, MeasureUnitType } from "../../types";
 import Preloader from "../Preloader/Preloader";
 import AsteroidCard from "../utils/AsteroidCard/AsteroidCard";
+import { dateToISOString } from "../../helpers/dateConverters";
+// import { getLiquidationListKeys } from "../../helpers/localStorageFunctions";
 
 
 
 
 type PropsType = {
-    asteroidsList: AsteroidListType
+    asteroidsList: Array<AsteroidInListType>
 }
 
 const Main: FC<PropsType> = ({asteroidsList}) => {
 
 
+// sorting parameters
+    let [measureUnit, setMeasureUnit] = useState('km'as MeasureUnitType);
+    let [isDangerFlag, setIsDangerFlag] = useState(false as boolean);
+
+
+// load-more logic
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
@@ -23,26 +31,9 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
         if (!isFetchingStatus) {
             setIsFetchingStatus(true)
             loadMore()
+        }
     }
-    }
 
-
-
-
-
-
-
-
-
-
-
-// sorting parameters
-    let [measureUnit, setMeasureUnit] = useState('km'as MeasureUnitType);
-    let [isDangerFlag, setIsDangerFlag] = useState(false as boolean);
-
-
-
-// load more logic
     let [scrollDate, setScrollDate] = useState(new Date());
     let [asteroidsListState, setAsteroidsListState] = useState(asteroidsList as AsteroidListType);
     let [isFetchingStatus, setIsFetchingStatus] = useState(false as boolean);
@@ -50,22 +41,29 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
     let loadMore = async () => {
          
         scrollDate.setDate(scrollDate.getDate() + 1);
-        let dateToString = scrollDate.toISOString().split('T')[0];
-        const resp = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`);
+
+        const resp = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateToISOString(scrollDate)}&end_date=${dateToISOString(scrollDate)}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`);
         const data = await resp.json();
 
         if (!data) {
             return { notFound: true }
         } 
        
-        setAsteroidsListState([...asteroidsListState, ...data.near_earth_objects[dateToString] ])
+        if (data?.near_earth_objects?.[dateToISOString(scrollDate)]) {
+            setAsteroidsListState([...asteroidsListState, ...data.near_earth_objects[dateToISOString(scrollDate)] ])
+        }
         setIsFetchingStatus(false)
     }
     
- 
+// liquidation info
+
+    // let [asteroidsForLiquidationKeys, setAsteroidsForLiquidationKeys] = useState([] as Array<string>);
+    // useEffect(() => {
+    //     setAsteroidsForLiquidationKeys(getLiquidationListKeys())
+
+    // },[])
 
 
- 
 
     return (
         <div className={styles.MainWrapper}>
@@ -100,9 +98,19 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
                     {!!asteroidsListState && (asteroidsListState.length > 0) && 
                         asteroidsListState.map(m => 
                             isDangerFlag 
-                            ? (m.is_potentially_hazardous_asteroid) && <AsteroidCard asteroid={m} measureUnit={measureUnit} key={m.id} isInLiquidation={false}/>
-                            : <AsteroidCard asteroid={m}  measureUnit={measureUnit} key={m.id} isInLiquidation={false}/>
-
+                                ? (m.is_potentially_hazardous_asteroid) && 
+                                    <AsteroidCard 
+                                        asteroid={m} 
+                                        measureUnit={measureUnit} 
+                                        key={m.id} 
+                                        isInLiquidationPage={false} 
+                                        isInLiquidationList={false} />
+                                : <AsteroidCard 
+                                    asteroid={m} 
+                                    measureUnit={measureUnit} 
+                                    key={m.id} 
+                                    isInLiquidationPage={false} 
+                                    isInLiquidationList={false} />
                         )
                     }
                 </div>

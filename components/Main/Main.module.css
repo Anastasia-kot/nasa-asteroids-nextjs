@@ -1,49 +1,54 @@
-.MainWrapper{
+.MainWrapper {
     width: 100%;
-    background-color: rgb(255, 255, 255);
-    margin-right:  30px;
-    margin-left:  30px;
-    margin-top: 0;
+    background-color: rgb(255, 255, 255);    
+}
+@media (min-width: 321px) {
+    .MainWrapper {
+        margin: 0 30px;
+    }
+}
+@media (max-width: 320px) {
+    .MainWrapper {margin: 0 16px;}
 }
 
-.Main{
+
+.Main {
     margin: 0 auto;
-        max-width: 1000px;
-        min-width: 362px;
-        padding: 16px 30px;
-  
+    max-width: 1000px;
+    min-width: 362px;
+
 }
 
 .MainHeader {
     margin-top: 24px;
     /* Ближайшие подлёты */
-    
-    
-        width: 288px;
-            /* width: 100%; */
-        height: 28px;
-    
-        font-family: 'Helvetica';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 28px;
-        /* identical to box height */
-    
-    
-        /* Black */
-    
-        color: #000000;
-    
-    
-        /* Inside auto layout */
-    
-        flex: none;
-        order: 0;
-        flex-grow: 0;
-   }
 
-.MainHeaderLine{
+
+    width: 288px;
+    /* width: 100%; */
+    height: 28px;
+
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    /* identical to box height */
+
+
+    /* Black */
+
+    color: #000000;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.MainHeaderLine {
     /* content: ''; */
     border-top: 1px solid #D7D7D7;
     height: 0px;
@@ -51,7 +56,7 @@
     /* width: 100%; */
     margin: 8px 0;
     margin-right: 30px;
-    
+
 }
 
 
@@ -74,13 +79,13 @@
     align-items: center;
 
     margin-bottom: 40px;
- }
+}
 
 .MainParametersDistance {
     /* display: inline; */
 }
 
-.ParameterDistance{
+.ParameterDistance {
     font-family: Helvetica;
     font-size: 16px;
     font-weight: 400;
@@ -90,7 +95,8 @@
     display: inline-block;
     text-decoration: underline;
 }
-.ParameterDistanceActive{
+
+.ParameterDistanceActive {
     font-family: Helvetica;
     font-size: 16px;
     font-weight: 700;
@@ -109,96 +115,93 @@
 
 
 
-.MainParametersDangerous{
+.MainParametersDangerous {
     /* display: inline; */
     /* text-align: right; */
     /* justify-self: flex-end;
     flex-basis: 218px; */
-    
+
     /* position: absolute; */
-            /* width: 196px; */
-            height: 20px;
-            /* left: 744px;
+    /* width: 196px; */
+    height: 20px;
+    /* left: 744px;
             top: 46px; */
-        
-            font-family: 'Helvetica';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 20px;
-            /* identical to box height, or 125% */
-        
-        
-            /* Black */
-        
-            color: #000000;
- }
+
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height, or 125% */
+
+
+    /* Black */
+
+    color: #000000;
+}
 
 
 .MainParametersDangerousInput {
     height: 18px;
     width: 18px;
-    
+
     border-radius: 2px;
     background: #000000;
 }
 
- .MainParametersDangerousSpan{
-
- }
+.MainParametersDangerousSpan {}
 
 
 
- .AsteroidsBlock {
+.AsteroidsBlock {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    
-  }
+
+}
 
 
-  .LoadButton {
-      /* Auto layout */
+.LoadButton {
+    /* Auto layout */
 
-      /* display: flex;
+    display: flex;
     flex-direction: row;
-    align-items: center; */
-      padding: 2px 11px;
-      /* gap: 2px; */
+    align-items: center;
+    padding: 2px 11px;
+    /* gap: 2px; */
 
-      /* width: min-content; */
-      height: 24px;
+    /* width: min-content; */
+    max-height: 24px;
 
-      /* Blue Base */
+    /* Blue Base */
 
-      background: #186DD6;
-      border-radius: 24px;
-
-
-
-
-      /* Text */
-
-
-      /* width: 88px; */
-      /* height: 20px; */
-
-      font-family: 'Helvetica';
-      font-style: normal;
-      font-weight: 700;
-      font-size: 11px;
-      line-height: 20px;
-      /* identical to box height, or 182% */
-
-      display: flex;
-      align-items: center;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-
-      /* White Base */
-
-      color: #FFFFFF;
+    background: #186DD6;
+    border-radius: 24px;
 
 
 
-  }
+
+    /* Text */
+
+
+    /* width: 88px; */
+    /* height: 20px; */
+
+    font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 20px;
+    /* identical to box height, or 182% */
+
+    
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    /* White Base */
+
+    color: #FFFFFF;
+
+
+
+}

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styles from './AsteroidCard.module.css';
 import classNames from '../../../node_modules/classnames/index'
 import Link from "../../../node_modules/next/link";
@@ -9,6 +9,7 @@ import { dateCloserFinder, dateConverter } from "../../../helpers/dateConverters
 import { nameConverter, distanceOrbitSuffix } from "../../../helpers/nameConverters";
 import { diameterConverter } from "../../../helpers/diameterConverters";
 import { AsteroidInListType, MeasureUnitType } from "../../../types";
+import { toggleInLiquidationList } from "../../../helpers/localStorageFunctions";
 
 
 
@@ -18,13 +19,15 @@ type PropsType = {
     asteroid: AsteroidInListType
     measureUnit: MeasureUnitType
     key: string
-    isInLiquidation: boolean
+    isInLiquidationPage: boolean
+    isInLiquidationList: boolean
 }
 
 
-const AsteroidCard: FC<PropsType> = ({ asteroid, measureUnit, key, isInLiquidation }) => {
+const AsteroidCard: FC<PropsType> = ({ asteroid, measureUnit, key, isInLiquidationPage, isInLiquidationList }) => {
+
     return (
-        <div className={styles.ListItem}>
+        <div className={styles.ListItem} key={key}>
 
             <div className={styles.Date}>
                 {dateConverter(dateCloserFinder(asteroid.close_approach_data))}   
@@ -72,20 +75,23 @@ const AsteroidCard: FC<PropsType> = ({ asteroid, measureUnit, key, isInLiquidati
             </a></Link>
 
 
-
-            {isInLiquidation
-                ? <button className={styles.AsteroidLiquidate} onClick={() => {
-                    window.localStorage.removeItem(asteroid.id);
-                }}>
-                    Оставить
+            {(isInLiquidationPage) 
+                ? <button 
+                        className={styles.AsteroidLiquidate}
+                        // disabled={!isInLiquidationList}
+                        onClick={() => {  toggleInLiquidationList(false, asteroid) }}
+                        >
+                    Оставить  
                 </button>
-                : <button className={styles.AsteroidLiquidate} onClick={() => {
-                    let serialObj = JSON.stringify(asteroid);
-                    window.localStorage.setItem(asteroid.id, serialObj);  
-                }}>
+                : <button 
+                    className={styles.AsteroidLiquidate}
+                    // disabled={isInLiquidationList}
+                    onClick={() => { toggleInLiquidationList(true, asteroid) }}
+                    >
                     Уничтожить
                 </button>
             }
+        
         
         </div>
     )
