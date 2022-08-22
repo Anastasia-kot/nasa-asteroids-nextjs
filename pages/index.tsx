@@ -37,7 +37,7 @@ type PropsType = {
 const Home: FC<PropsType> = ({ asteroidsList }) => {
 
 
-  return (
+  return ( 
     <Main asteroidsList={asteroidsList} />
   )
 }

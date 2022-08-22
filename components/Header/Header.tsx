@@ -101,12 +101,29 @@ const Header = () => {
     let [backgroundImage, setBackgroundImage] = useState(null);
 
     useEffect(() => {
-        let date = dateToISOString(new Date()) 
-        fetch(`https://api.nasa.gov/planetary/apod?start_date=${date}&end_date=${date}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`)
+        let endDateISO = dateToISOString(new Date()) 
+        
+        let startDate = new Date();
+        startDate.setDate(startDate.getDate() -7); 
+ 
+        let startDateISO = dateToISOString(startDate);
+
+        
+        
+        fetch(`https://api.nasa.gov/planetary/apod?start_date=${startDateISO}&end_date=${endDateISO}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`)
             .then(response => response.json())
             .then(commits => {
-                setBackgroundImage(commits[0].url);
-             });
+
+                commits.reverse();
+                for (const commit of commits) {
+                    console.log(commit);
+                    if (commit.media_type === "image") {
+                        setBackgroundImage(commit.url);
+                        break;
+                    }
+                }
+            
+            });
     }, [])
 
 

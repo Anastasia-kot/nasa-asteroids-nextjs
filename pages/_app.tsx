@@ -23,7 +23,7 @@ const MyApp:FC<any> = ({ Component, pageProps }) => {
   return (
     <Layout>
       <Component {...pageProps} />
-    </Layout>
+    </Layout>  
     )
 }
 
