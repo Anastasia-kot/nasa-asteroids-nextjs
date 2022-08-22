@@ -116,7 +116,6 @@ const Header = () => {
 
                 commits.reverse();
                 for (const commit of commits) {
-                    console.log(commit);
                     if (commit.media_type === "image") {
                         setBackgroundImage(commit.url);
                         break;

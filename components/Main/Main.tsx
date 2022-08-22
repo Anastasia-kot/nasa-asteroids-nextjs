@@ -20,11 +20,17 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
     let [measureUnit, setMeasureUnit] = useState('km'as MeasureUnitType);
     let [isDangerFlag, setIsDangerFlag] = useState(false as boolean);
 
-
+    
+    
+    const [state, setState] = useState({ scrollTop: 0 });
 // load-more logic
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('mousewheel', handleScroll )
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+            window.removeEventListener('mousewheel', handleScroll)
+        }
     })
 
     const handleScroll = () => {
