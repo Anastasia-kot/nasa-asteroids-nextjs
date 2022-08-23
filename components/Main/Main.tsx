@@ -1,10 +1,10 @@
-import React, { useEffect, useState, FC } from "react";
+import React, { useEffect, useState, FC, useCallback } from "react";
 import styles from './Main.module.css';
 import { AsteroidInListType, AsteroidListType, MeasureUnitType } from "../../types";
 import Preloader from "../Preloader/Preloader";
 import AsteroidCard from "../utils/AsteroidCard/AsteroidCard";
 import { dateToISOString } from "../../helpers/dateConverters";
-// import { getLiquidationListKeys } from "../../helpers/localStorageFunctions";
+import { getPortionAsteroidsAPI } from "../../API/api";
 
 
 
@@ -20,10 +20,48 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
     let [measureUnit, setMeasureUnit] = useState('km'as MeasureUnitType);
     let [isDangerFlag, setIsDangerFlag] = useState(false as boolean);
 
+    let [scrollDate, setScrollDate] = useState(new Date());
+    let [asteroidsListState, setAsteroidsListState] = useState(asteroidsList as AsteroidListType);
+    let [isFetchingStatus, setIsFetchingStatus] = useState(false as boolean);
+
     
     
     const [state, setState] = useState({ scrollTop: 0 });
+
+
+
+
+
+
+    const loadMore = useCallback( async () => {
+        setIsFetchingStatus(true)
+
+        scrollDate.setDate(scrollDate.getDate() + 1);
+        const dateToString = dateToISOString(scrollDate);
+
+        let data = await getPortionAsteroidsAPI(dateToString);
+
+        if (!data) {
+            return { notFound: true }
+        }
+
+        setAsteroidsListState([...asteroidsListState, ...data ])
+        setIsFetchingStatus(false)
+    }, [scrollDate, asteroidsListState])
+
+
+
+
+
 // load-more logic
+
+    const handleScroll = useCallback(() => {
+        if (!isFetchingStatus) {
+            loadMore()
+        }
+    }, [setIsFetchingStatus, loadMore, isFetchingStatus])
+    //use call back
+
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('mousewheel', handleScroll )
@@ -31,35 +69,11 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
             window.removeEventListener('scroll', handleScroll)
             window.removeEventListener('mousewheel', handleScroll)
         }
-    })
+    }, [handleScroll])
 
-    const handleScroll = () => {
-        if (!isFetchingStatus) {
-            setIsFetchingStatus(true)
-            loadMore()
-        }
-    }
+    
+    
 
-    let [scrollDate, setScrollDate] = useState(new Date());
-    let [asteroidsListState, setAsteroidsListState] = useState(asteroidsList as AsteroidListType);
-    let [isFetchingStatus, setIsFetchingStatus] = useState(false as boolean);
-
-    let loadMore = async () => {
-         
-        scrollDate.setDate(scrollDate.getDate() + 1);
-
-        const resp = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${dateToISOString(scrollDate)}&end_date=${dateToISOString(scrollDate)}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`);
-        const data = await resp.json();
-
-        if (!data) {
-            return { notFound: true }
-        } 
-       
-        if (data?.near_earth_objects?.[dateToISOString(scrollDate)]) {
-            setAsteroidsListState([...asteroidsListState, ...data.near_earth_objects[dateToISOString(scrollDate)] ])
-        }
-        setIsFetchingStatus(false)
-    }
     
 // liquidation info
 

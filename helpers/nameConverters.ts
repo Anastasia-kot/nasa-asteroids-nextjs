@@ -42,6 +42,7 @@ export const planetConverter = (planet: string): string => {
         case 'Saturn': return 'Сатурн'; break;
         case 'Uranus': return 'Уран'; break;
         case 'Neptune': return 'Нептун'; break;
+        case 'Moon': return 'Луна'; break;
         default: return planet; break; break;
     };
 }

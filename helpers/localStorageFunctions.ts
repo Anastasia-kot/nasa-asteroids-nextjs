@@ -1,4 +1,3 @@
-import { StringifyOptions } from "querystring";
 import { AsteroidInListType } from "../types";
 
 export const toggleInLiquidationList = (add: boolean, asteroid: AsteroidInListType): void  => {
@@ -13,15 +12,14 @@ export const getLiquidationList = (): Array<AsteroidInListType>   => {
     let arr: Array<AsteroidInListType>; 
     try {
         for (let key in window.localStorage) {
-            if ((!window.localStorage.hasOwnProperty(key))
+            if (
+                (!window.localStorage.hasOwnProperty(key))
                 && (typeof (+key) === "number")
                 && (!JSON.parse(window.localStorage.getItem(key)).hasOwnProperty('id'))
-            ) {
-                continue;  // пропустит такие ключи, как "setItem", "getItem" и так далее
+                ) { continue;   
+            } else {
+                arr.push(JSON.parse(window.localStorage.getItem(key)));
             }
-
-            arr.push(JSON.parse(window.localStorage.getItem(key)));
-
         }
 
     } catch (err) {

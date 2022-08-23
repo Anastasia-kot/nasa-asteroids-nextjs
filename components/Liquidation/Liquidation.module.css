@@ -4,11 +4,13 @@
     margin-top: 0;
 
 }
+
 @media (min-width: 321px) {
     .LiquidationWrapper {
         margin: 0 30px;
     }
 }
+
 @media (max-width: 320px) {
     .LiquidationWrapper {
         margin: 0 16px;

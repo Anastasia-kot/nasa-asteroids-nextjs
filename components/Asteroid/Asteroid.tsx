@@ -20,16 +20,8 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
     // info block about closeApproach dates
     let [closeApproachPortion, setCloseApproachPortion] = useState(0 as number);
 
-
-    // liquidation info
-
-    // let [isInLiquidationList, setIsInLiquidationList] = useState(false as boolean);
-    // useEffect(() => {
-    //    setIsInLiquidationList ( getLiquidationListKeys().includes(asteroidInfo.id)   )
-    // },[])
-
-  
-    if (asteroidInfo.id == '0')  {      
+   
+    if (!asteroidInfo)  {      
         return (
             <div className={styles.AsteroidWrapper}>
                 <div className={styles.Asteroid}>
@@ -59,7 +51,7 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
             <div className={styles.HeaderLine}> </div>
             <div className={styles.close_approach_dataContainer}>
                 {asteroidInfo.close_approach_data.map( d=> {
-                    if (asteroidInfo.close_approach_data.indexOf(d) < (closeApproachPortion+1)*8 ) {
+                    if (asteroidInfo.close_approach_data.indexOf(d) < (closeApproachPortion+1)*10 ) {
                     return (
                         <div key={asteroidInfo.close_approach_data.indexOf(d)} className={styles.close_approach_container}>
                             <div>  {dateConverter(d.close_approach_date)}, {(d.close_approach_date_full.split(' ')[1])}</div>
@@ -76,7 +68,7 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
                     )}
                 })}
             </div>
-                {(asteroidInfo.close_approach_data.length > ((closeApproachPortion + 1) * 8)) &&
+                {(asteroidInfo.close_approach_data.length > ((closeApproachPortion + 1) * 10)) &&
                         <button onClick={() => {
                             setCloseApproachPortion(closeApproachPortion + 1) }}
                             className={styles.AsteroidLiquidate}>

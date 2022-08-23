@@ -5,6 +5,8 @@ import Liquidation from '../../components/Liquidation/Liquidation'
  
  
 const liquidation:FC = () =>  {
+
+    //useEffect подписаться на локал сторейдж событие 
     return (
         <Liquidation />
     )

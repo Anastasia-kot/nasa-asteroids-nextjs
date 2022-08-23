@@ -1,44 +1,29 @@
 import styles from '../styles/Home.module.css'
-import Main from '../components/Main/Main'
-import { useRouter } from '../node_modules/next/router';
-import { useEffect, FC, useRef } from 'react';
-import { AsteroidListType } from '../types';
-import { dateToISOString } from '../helpers/dateConverters';
+ import { useRouter } from '../node_modules/next/router';
+import { useEffect, FC } from 'react';
+ 
+ 
+ 
+
+const Home: FC = () => {
 
 
-export const getStaticProps = async () => {
-  let dateToString = dateToISOString(new Date())
-    const resp = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?
-                start_date=${dateToString}&end_date=${dateToString}&api_key=ceNew9zKnInO2vohN90DJaUwLHItH6I8ZjahzfbW`);
-  const data = await resp.json();
+  const router = useRouter();
 
-  if (!data) {
-    return { notFound: true }
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      router.push('/asteroids')
+    },
+      3000 
+    )
+  }, [router])
 
-  
-
-  if (!data.near_earth_objects || !data.near_earth_objects[dateToString]) {
-    return {
-      props: { asteroidsList:[] }
-    }
-  }
-  return {
-    props: { asteroidsList: data.near_earth_objects[dateToString] }
-  }
-}
-
-
-
-type PropsType = {
-  asteroidsList: AsteroidListType
-}
-
-const Home: FC<PropsType> = ({ asteroidsList }) => {
-
-
-  return ( 
-    <Main asteroidsList={asteroidsList} />
+  return (
+    <div className={styles.MainWrapper}>
+      <div className={styles.Main}>
+        Этой страницы не существует
+      </div>
+    </div>
   )
 }
 

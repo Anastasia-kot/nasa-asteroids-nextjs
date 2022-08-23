@@ -8,32 +8,34 @@ import { AsteroidInListType } from "../../types";
 const Liquidation:FC = ( ) => {
 
   let [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
-
-  try {
-    for (let key in window.localStorage) {
-      if ((!window.localStorage.hasOwnProperty(key))
-        && (typeof (+key) === "number")
-        && (!JSON.parse(window.localStorage.getItem(key)).hasOwnProperty('id'))
-      ) {
-        continue;  // пропустит такие ключи, как "setItem", "getItem" и так далее
+  
+  useEffect(() => {
+    try {
+      for (let key in window.localStorage) {
+        
+        let currentItem = JSON.parse(window.localStorage.getItem(key));
+        
+        if ( !(currentItem.hasOwnProperty('neo_reference_id'))  ) { 
+          continue 
+        } else {
+          // asteroidsForLiquidation.push(currentItem)
+          setAsteroidsForLiquidation([...asteroidsForLiquidation, currentItem])
+        }
       }
-      asteroidsForLiquidation.push(JSON.parse(window.localStorage.getItem(key)));
+
+    } catch (err) {
+
     }
+  }, [])
+ 
 
-  } catch (err) {
-
-  }
-
-  // useEffect(() => {
-  //     setAsteroidsForLiquidation(  getLiquidationList() )
-  // }, [])
-
-
+  console.log(  asteroidsForLiquidation)
+  
   return (
     <div className={styles.LiquidationWrapper}>
       <div className={styles.Liquidation}>
 
-        {!!asteroidsForLiquidation && asteroidsForLiquidation.length > 0
+        {asteroidsForLiquidation.length > 0
           ?<>
             <h1 className={styles.Header}> Заказать уничтожение астероидов</h1>
             <div className={styles.HeaderLine}> </div>
@@ -48,18 +50,17 @@ const Liquidation:FC = ( ) => {
               }}>
               Уничтожить
             </button>
-
+{/* создать колбек 'он делит' и прокинуть  */}
 
             <div className={styles.AsteroidsBlock}> {asteroidsForLiquidation.map(m =>
-              m.hasOwnProperty('id')
-                ? <AsteroidCard 
+              <AsteroidCard 
                     asteroid={m} 
                     key={m.id} 
                     measureUnit={'km'} 
                     isInLiquidationPage={true} 
                     isInLiquidationList={true} />
-                : null
-            )}  </div>
+              )}  
+            </div>
           </>
 
           :<>
