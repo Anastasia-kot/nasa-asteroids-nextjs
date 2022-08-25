@@ -12,33 +12,45 @@ export const toggleInLiquidationList = (add: boolean, asteroid: AsteroidInListTy
  
 export const getLiquidationList = (): Array<AsteroidInListType>   => {
     let arr: Array<AsteroidInListType>; 
-    try {
-        for (let key in window.localStorage) {
-            if (
-                (!window.localStorage.hasOwnProperty(key))
-                && (typeof (+key) === "number")
-                && (!JSON.parse(window.localStorage.getItem(key)).hasOwnProperty('id'))
-                ) { continue;   
+    
+         for (let key in window.localStorage) {
+            if (!(parseFunction(key)?.hasOwnProperty('links')))       { 
+                continue;   
             } else {
-                arr.push(JSON.parse(window.localStorage.getItem(key)));
+                arr.push(parseFunction(key));
             }
         }
-
-    } catch (err) {
-
-    }
-
+ 
     return arr
 }
 
 
 
-
-export const getLiquidationListKeys = (): Array<string> => {
-    try {
-        return Object.keys(window.localStorage)
-    } catch (err) {
-
-    }
-    return []
+ 
+export const parseFunction = (key: string) => {
+    return JSON.parse(window.localStorage.getItem(key))
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export const getLiquidationListKeys = (): Array<string> => {
+//     try {
+//         return Object.keys(window.localStorage)
+//     } catch (err) {
+
+//     }
+//     return []
+// }

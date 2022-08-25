@@ -1,58 +1,46 @@
 import React, { FC, useEffect, useState } from "react";
 import styles from './Liquidation.module.css';
 import AsteroidCard from "../utils/AsteroidCard/AsteroidCard";
-// import { getLiquidationList } from "../../helpers/localStorageFunctions";
-import { AsteroidInListType, close_approach_dataType, estimated_diameterType } from "../../types";
+import { AsteroidInListType} from "../../types";
+import { parseFunction } from "../../helpers/localStorageFunctions";
 
 
-const Liquidation:FC = ( ) => {
+type Props = {
+  asteroidsForLiquidation: Array<AsteroidInListType>
+}
 
-  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
+
+const Liquidation: FC<Props> = ({ asteroidsForLiquidation }) => {
+
+const [asteroidsForLiquidationFC, setAsteroidsForLiquidationFC] = useState(asteroidsForLiquidation as Array<AsteroidInListType>);
+   
   
-  useEffect(() => {
-       for (let key in window.localStorage) {
- 
-        // console.log(key, ': ', JSON.parse(window.localStorage.getItem(key)))
- 
-         if (!(JSON.parse(window.localStorage.getItem(key))?.hasOwnProperty('links'))  ) { 
-          continue 
-        } else {
-          console.log('----------------------------',key, 'ADDED ');
-
-              // setAsteroidsForLiquidation([...asteroidsForLiquidation, JSON.parse(window.localStorage.getItem(key))]);
-           asteroidsForLiquidation.push(JSON.parse(window.localStorage.getItem(key)))
-          console.log(  asteroidsForLiquidation)
-
-        }
-      }
-  }, [])
  
 
-  // console.log(  asteroidsForLiquidation)
+  console.log( 'FC: ', asteroidsForLiquidationFC)
   
   return (
     <div className={styles.LiquidationWrapper}>
       <div className={styles.Liquidation}>
 
-        {true
-        // asteroidsForLiquidation.length > 0
+        {asteroidsForLiquidationFC &&
+        asteroidsForLiquidationFC.length > 0
           ?<>
             <h1 className={styles.Header}> Заказать уничтожение астероидов</h1>
             <div className={styles.HeaderLine}> </div>
             <p>Заказать бригаду имени Брюса Уиллиса для уничтожения выбранных астероидов</p>
 
-            <button
+            <button  //создать колбек 'он_делит' и прокинуть  
               className={styles.AsteroidLiquidate}
               onClick={() => {
                 window.localStorage.clear();
-                setAsteroidsForLiquidation([])
+                setAsteroidsForLiquidationFC([])
                 alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
-              }}>
+              }}> 
               Уничтожить
             </button>
-{/* создать колбек 'он делит' и прокинуть  */}
 
-            <div className={styles.AsteroidsBlock}> {asteroidsForLiquidation.map(m =>
+             <div className={styles.AsteroidsBlock}> {asteroidsForLiquidationFC.map(m =>
               <AsteroidCard 
                     asteroid={m} 
                     key={m.id} 
