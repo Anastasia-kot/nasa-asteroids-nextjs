@@ -2,40 +2,40 @@ import React, { FC, useEffect, useState } from "react";
 import styles from './Liquidation.module.css';
 import AsteroidCard from "../utils/AsteroidCard/AsteroidCard";
 // import { getLiquidationList } from "../../helpers/localStorageFunctions";
-import { AsteroidInListType } from "../../types";
+import { AsteroidInListType, close_approach_dataType, estimated_diameterType } from "../../types";
 
 
 const Liquidation:FC = ( ) => {
 
-  let [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
+  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
   
   useEffect(() => {
-    try {
-      for (let key in window.localStorage) {
-        
-        let currentItem = JSON.parse(window.localStorage.getItem(key));
-        
-        if ( !(currentItem.hasOwnProperty('neo_reference_id'))  ) { 
+       for (let key in window.localStorage) {
+ 
+        // console.log(key, ': ', JSON.parse(window.localStorage.getItem(key)))
+ 
+         if (!(JSON.parse(window.localStorage.getItem(key))?.hasOwnProperty('links'))  ) { 
           continue 
         } else {
-          // asteroidsForLiquidation.push(currentItem)
-          setAsteroidsForLiquidation([...asteroidsForLiquidation, currentItem])
+          console.log('----------------------------',key, 'ADDED ');
+
+              // setAsteroidsForLiquidation([...asteroidsForLiquidation, JSON.parse(window.localStorage.getItem(key))]);
+           asteroidsForLiquidation.push(JSON.parse(window.localStorage.getItem(key)))
+          console.log(  asteroidsForLiquidation)
+
         }
       }
-
-    } catch (err) {
-
-    }
   }, [])
  
 
-  console.log(  asteroidsForLiquidation)
+  // console.log(  asteroidsForLiquidation)
   
   return (
     <div className={styles.LiquidationWrapper}>
       <div className={styles.Liquidation}>
 
-        {asteroidsForLiquidation.length > 0
+        {true
+        // asteroidsForLiquidation.length > 0
           ?<>
             <h1 className={styles.Header}> Заказать уничтожение астероидов</h1>
             <div className={styles.HeaderLine}> </div>

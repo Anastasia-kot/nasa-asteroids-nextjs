@@ -25,7 +25,7 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
     let [isFetchingStatus, setIsFetchingStatus] = useState(false as boolean);
 
     
-    
+
     const [state, setState] = useState({ scrollTop: 0 });
 
 

@@ -16,7 +16,8 @@ const Header = () => {
 
 
     useEffect( () => {
-        const endDateISO = dateToISOString(new Date()) 
+        const endDateISO = dateToISOString(new Date())
+       
         let startDate = new Date();
         startDate.setDate(startDate.getDate() - 7); 
  

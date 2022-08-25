@@ -27,7 +27,7 @@ type PropsType = {
 const AsteroidCard: FC<PropsType> = ({ asteroid, measureUnit, key, isInLiquidationPage, isInLiquidationList }) => {
 
     return (
-        <div className={styles.ListItem} key={key}>
+        <div className={styles.ListItem} key={key} id={key}>
 
             <div className={styles.Date}>
                 {dateConverter(dateCloserFinder(asteroid.close_approach_data))}   

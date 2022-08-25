@@ -2,8 +2,10 @@ import { AsteroidInListType } from "../types";
 
 export const toggleInLiquidationList = (add: boolean, asteroid: AsteroidInListType): void  => {
     add
-        ? window.localStorage.setItem(asteroid.id, JSON.stringify(asteroid))
-        : window.localStorage.removeItem(asteroid.id)     
+        ?  window.localStorage.setItem(asteroid.id, JSON.stringify(asteroid))      
+        :  window.localStorage.removeItem(asteroid.id)
+        
+    console.log('button clicked')
 }
 
 
