@@ -23,7 +23,8 @@ const [asteroidsForLiquidationFC, setAsteroidsForLiquidationFC] = useState(aster
     <div className={styles.LiquidationWrapper}>
       <div className={styles.Liquidation}>
 
-        {asteroidsForLiquidationFC &&
+        {asteroidsForLiquidationFC && 
+      
         asteroidsForLiquidationFC.length > 0
           ?<>
             <h1 className={styles.Header}> Заказать уничтожение астероидов</h1>
