@@ -27,4 +27,7 @@ const MyApp:FC<any> = ({ Component, pageProps }) => {
     )
 }
 
+
+MyApp.displayName = 'MyApp';
+
 export default MyApp;

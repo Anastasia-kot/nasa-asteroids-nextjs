@@ -7,7 +7,7 @@ import { useEffect, FC } from 'react';
 
 const Home: FC = () => {
 
-
+ 
   const router = useRouter();
 
   useEffect(() => {

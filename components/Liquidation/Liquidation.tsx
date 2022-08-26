@@ -5,27 +5,43 @@ import { AsteroidInListType} from "../../types";
 import { parseFunction } from "../../helpers/localStorageFunctions";
 
 
-type Props = {
-  asteroidsForLiquidation: Array<AsteroidInListType>
-}
+// type Props = {
+//   asteroidsForLiquidation: Array<AsteroidInListType>
+// }
 
 
-const Liquidation: FC<Props> = ({ asteroidsForLiquidation }) => {
+const Liquidation = React.memo( () => {
 
-const [asteroidsForLiquidationFC, setAsteroidsForLiquidationFC] = useState(asteroidsForLiquidation as Array<AsteroidInListType>);
-   
+
+  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([]);
+
+ 
+
+  useEffect( ()=>{
+    let arr = []
+    for (let key in window.localStorage) {
+      if (!(parseFunction(key)?.hasOwnProperty('links'))) {
+        continue;
+      } else {
+        arr.push(parseFunction(key));
+      }
+    }
+    setAsteroidsForLiquidation([...arr])
+
+
+  },[]) 
+  console.log(asteroidsForLiquidation)
+ 
   
  
 
-  console.log( 'FC: ', asteroidsForLiquidationFC)
   
   return (
     <div className={styles.LiquidationWrapper}>
       <div className={styles.Liquidation}>
 
-        {asteroidsForLiquidationFC && 
-      
-        asteroidsForLiquidationFC.length > 0
+        {asteroidsForLiquidation && 
+        asteroidsForLiquidation.length > 0
           ?<>
             <h1 className={styles.Header}> Заказать уничтожение астероидов</h1>
             <div className={styles.HeaderLine}> </div>
@@ -35,13 +51,13 @@ const [asteroidsForLiquidationFC, setAsteroidsForLiquidationFC] = useState(aster
               className={styles.AsteroidLiquidate}
               onClick={() => {
                 window.localStorage.clear();
-                setAsteroidsForLiquidationFC([])
+                setAsteroidsForLiquidation([])
                 alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
               }}> 
               Уничтожить
             </button>
 
-             <div className={styles.AsteroidsBlock}> {asteroidsForLiquidationFC.map(m =>
+             <div className={styles.AsteroidsBlock}> {asteroidsForLiquidation.map(m =>
               <AsteroidCard 
                     asteroid={m} 
                     key={m.id} 
@@ -61,6 +77,9 @@ const [asteroidsForLiquidationFC, setAsteroidsForLiquidationFC] = useState(aster
       </div>
     </div>
     )
-}
+})
+
+
+Liquidation.displayName = 'Liquidation';
 
 export default Liquidation;

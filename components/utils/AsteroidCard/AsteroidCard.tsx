@@ -22,10 +22,8 @@ type PropsType = {
     isInLiquidationPage: boolean
     isInLiquidationList: boolean
 }
-
-
-const AsteroidCard: FC<PropsType> = ({ asteroid, measureUnit, key, isInLiquidationPage, isInLiquidationList }) => {
-
+ 
+const AsteroidCard = React.memo<PropsType> ( ({ asteroid, measureUnit, key, isInLiquidationPage, isInLiquidationList }) => {
     return (
         <div className={styles.ListItem} key={key} id={key}>
 
@@ -95,7 +93,8 @@ const AsteroidCard: FC<PropsType> = ({ asteroid, measureUnit, key, isInLiquidati
         
         </div>
     )
-}
+})
+AsteroidCard.displayName = 'AsteroidCard';
 
 export default AsteroidCard;
 

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC,  useState} from 'react';
 import classNames from '../../node_modules/classnames/index';
 import styles from './Asteroid.module.css';
 const dinoImg = require('./../../public/img/dinoImg.svg');

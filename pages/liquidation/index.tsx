@@ -12,27 +12,12 @@ import { AsteroidInListType, AsteroidListType } from '../../types';
 const liquidation: FC  = () =>  {
 
 
-    const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
-
-    try {
-
-        for (let key in window.localStorage) {
-            if (!(parseFunction(key)?.hasOwnProperty('links'))) {
-                continue;
-            } else {
-                asteroidsForLiquidation.push(parseFunction(key));
-            }
-        }
-    } catch (err) {
-
-    }
-
-    console.log(asteroidsForLiquidation)
+    
 
     //useEffect подписаться на локал сторейдж событие 
     
     return (
-        <Liquidation asteroidsForLiquidation={asteroidsForLiquidation} />
+        <Liquidation  />
     )
 }
 
