@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import styles from './Liquidation.module.css';
-import AsteroidCard from "../utils/AsteroidCard/AsteroidCard";
-import { AsteroidInListType} from "../../types";
-import { parseFunction } from "../../helpers/localStorageFunctions";
+import { AsteroidInListType} from "../../../types";
+import { parseFunction } from "../../../helpers/localStorageFunctions";
+import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
+import Button from "../../components/Button/Button";
 
 
 // type Props = {
@@ -29,12 +30,16 @@ const Liquidation = React.memo( () => {
     setAsteroidsForLiquidation([...arr])
 
 
-  },[]) 
+  }, []) 
   console.log(asteroidsForLiquidation)
  
   
  
-
+const onLiquidate = () =>{
+  window.localStorage.clear();
+  setAsteroidsForLiquidation([])
+  alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
+}
   
   return (
     <div className={styles.LiquidationWrapper}>
@@ -47,18 +52,14 @@ const Liquidation = React.memo( () => {
             <div className={styles.HeaderLine}> </div>
             <p>Заказать бригаду имени Брюса Уиллиса для уничтожения выбранных астероидов</p>
 
-            <button  //создать колбек 'он_делит' и прокинуть  
-              className={styles.AsteroidLiquidate}
-              onClick={() => {
-                window.localStorage.clear();
-                setAsteroidsForLiquidation([])
-                alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
-              }}> 
-              Уничтожить
-            </button>
+        
+
+            <Button
+              text={'Уничтожить'}
+              onClickFunction={() => { onLiquidate() }} />  
 
              <div className={styles.AsteroidsBlock}> {asteroidsForLiquidation.map(m =>
-              <AsteroidCard 
+               <AsteroidCard  //создать колбек 'он_делит' и прокинуть
                     asteroid={m} 
                     key={m.id} 
                     measureUnit={'km'} 

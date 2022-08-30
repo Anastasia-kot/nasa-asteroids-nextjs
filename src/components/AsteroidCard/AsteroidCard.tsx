@@ -10,6 +10,7 @@ import { nameConverter, distanceOrbitSuffix } from "../../../helpers/nameConvert
 import { diameterConverter } from "../../../helpers/diameterConverters";
 import { AsteroidInListType, MeasureUnitType } from "../../../types";
 import { toggleInLiquidationList } from "../../../helpers/localStorageFunctions";
+import Button from "../Button/Button";
 
 
 
@@ -18,14 +19,13 @@ import { toggleInLiquidationList } from "../../../helpers/localStorageFunctions"
 type PropsType = {
     asteroid: AsteroidInListType
     measureUnit: MeasureUnitType
-    key: string
     isInLiquidationPage: boolean
     isInLiquidationList: boolean
 }
  
-const AsteroidCard = React.memo<PropsType> ( ({ asteroid, measureUnit, key, isInLiquidationPage, isInLiquidationList }) => {
+const AsteroidCard = React.memo<PropsType> ( ({ asteroid, measureUnit,  isInLiquidationPage, isInLiquidationList }) => {
     return (
-        <div className={styles.ListItem} key={key} id={key}>
+        <div className={styles.ListItem} >
 
             <div className={styles.Date}>
                 {dateConverter(dateCloserFinder(asteroid.close_approach_data))}   
@@ -74,20 +74,12 @@ const AsteroidCard = React.memo<PropsType> ( ({ asteroid, measureUnit, key, isIn
 
 
             {(isInLiquidationPage) 
-                ? <button 
-                        className={styles.AsteroidLiquidate}
-                        // disabled={!isInLiquidationList}
-                        onClick={() => {  toggleInLiquidationList(false, asteroid) }}
-                        >
-                    Оставить  
-                </button>
-                : <button 
-                    className={styles.AsteroidLiquidate}
-                    // disabled={isInLiquidationList}
-                    onClick={() => { toggleInLiquidationList(true, asteroid) }}
-                    >
-                    Уничтожить
-                </button>
+                ? <Button
+                    text={' Оставить  '}
+                    onClickFunction={() => {  toggleInLiquidationList(false, asteroid) }}    />  
+                : <Button
+                    text={' Уничтожить  '}
+                    onClickFunction={() => {  toggleInLiquidationList(true, asteroid) }}    />                      
             }
         
         

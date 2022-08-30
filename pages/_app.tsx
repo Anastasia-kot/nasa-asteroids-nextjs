@@ -1,24 +1,11 @@
 import '../styles/globals.css';
-import Layout from '../components/Layout';
 import { FC, useEffect, useRef } from 'react';
+import Layout from '../src/layout/Layout';
  
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 const MyApp:FC<any> = ({ Component, pageProps }) => {
-
-
 
   return (
     <Layout>

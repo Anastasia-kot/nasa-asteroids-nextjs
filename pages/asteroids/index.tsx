@@ -1,7 +1,7 @@
 // import '../styles/globals.css';
 import { FC } from 'react'
 import { getPortionAsteroidsAPI } from '../../API/api';
-import Main from '../../components/Main/Main'
+import Main from '../../src/screens/Main/Main'
 import { dateToISOString } from '../../helpers/dateConverters';
 import { AsteroidListType } from '../../types';
 

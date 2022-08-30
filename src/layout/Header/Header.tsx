@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from './Header.module.css';
-import Link from "../../node_modules/next/link";
-import { useRouter } from "../../node_modules/next/router";
-import { dateToISOString } from "../../helpers/dateConverters";
-import { getBackGroundImgAPI } from "../../API/api";
+import Link from "../../../node_modules/next/link";
+import { useRouter } from "../../../node_modules/next/router";
+import { dateToISOString } from "../../../helpers/dateConverters";
+import { getBackGroundImgAPI } from "../../../API/api";
  
 
 const Header = () => {

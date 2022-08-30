@@ -1,10 +1,10 @@
 import React, { useEffect, useState, FC, useCallback } from "react";
 import styles from './Main.module.css';
-import { AsteroidInListType, AsteroidListType, MeasureUnitType } from "../../types";
-import Preloader from "../Preloader/Preloader";
-import AsteroidCard from "../utils/AsteroidCard/AsteroidCard";
-import { dateToISOString } from "../../helpers/dateConverters";
-import { getPortionAsteroidsAPI } from "../../API/api";
+import { AsteroidInListType, AsteroidListType, MeasureUnitType } from "../../../types";
+import Preloader from "../../components/Preloader/Preloader";
+import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
+import { dateToISOString } from "../../../helpers/dateConverters";
+import { getPortionAsteroidsAPI } from "../../../API/api";
 
 
 

@@ -1,14 +1,14 @@
 import React, {FC,  useState} from 'react';
-import classNames from '../../node_modules/classnames/index';
+import classNames from '../../../node_modules/classnames/index';
 import styles from './Asteroid.module.css';
-const dinoImg = require('./../../public/img/dinoImg.svg');
-const asteroidImg = require('./../../public/img/asteroidImg.svg');
-import { dateConverter } from "./../../helpers/dateConverters";
-import { planetConverter } from "./../../helpers/nameConverters";
-import { AsteroidType } from '../../types';
-import AsteroidCard from '../utils/AsteroidCard/AsteroidCard';
-// import { getLiquidationListKeys } from '../../helpers/localStorageFunctions';
-
+const dinoImg = require('./../../../public/img/dinoImg.svg');
+const asteroidImg = require('./../../../public/img/asteroidImg.svg');
+import { dateConverter } from "../../../helpers/dateConverters";
+import { planetConverter } from "../../../helpers/nameConverters";
+import { AsteroidType } from '../../../types';
+import AsteroidCard from '../../components/AsteroidCard/AsteroidCard';
+import Button from '../../components/Button/Button';
+ 
 
   
 type PropsType = {
@@ -69,11 +69,10 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
                 })}
             </div>
                 {(asteroidInfo.close_approach_data.length > ((closeApproachPortion + 1) * 10)) &&
-                        <button onClick={() => {
-                            setCloseApproachPortion(closeApproachPortion + 1) }}
-                            className={styles.AsteroidLiquidate}>
-                            Загрузить сближения
-                        </button>}
+                    <Button 
+                        text={'Загрузить сближения'} 
+                        onClickFunction={() => { setCloseApproachPortion(closeApproachPortion + 1) }}/>                        
+                }
         </>
     )}
 

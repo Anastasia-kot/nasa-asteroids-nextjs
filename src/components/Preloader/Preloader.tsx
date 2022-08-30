@@ -1,7 +1,7 @@
 import styles from './Preloader.module.css';
 import { FC } from 'react';
-import Image from '../../node_modules/next/image';
-const dinoImg = require('./../../public/img/dinoImg.svg');
+import Image from '../../../node_modules/next/image';
+const dinoImg = require('./../../../public/img/dinoImg.svg');
 
 
  
