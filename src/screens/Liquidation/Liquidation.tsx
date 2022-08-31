@@ -21,7 +21,7 @@ const Liquidation = React.memo( () => {
   useEffect( ()=>{
     let arr = []
     for (let key in window.localStorage) {
-      if (!(parseFunction(key)?.hasOwnProperty('links'))) {
+      if (!(parseFunction(key)?.hasOwnProperty('neo_reference_id'))) {
         continue;
       } else {
         arr.push(parseFunction(key));

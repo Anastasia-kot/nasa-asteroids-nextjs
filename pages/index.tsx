@@ -18,6 +18,11 @@ const Home: FC = () => {
     )
   }, [router])
 
+  useEffect(() => {
+    window.localStorage.clear();
+    }, [])
+
+
   return (
     <div className={styles.MainWrapper}>
       <div className={styles.Main}>
