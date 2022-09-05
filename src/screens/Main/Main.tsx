@@ -34,19 +34,19 @@ const Main: FC<PropsType> = ({asteroidsList}) => {
 
 
     const loadMore = useCallback( async () => {
-        setIsFetchingStatus(true)
+        // setIsFetchingStatus(true)
 
-        scrollDate.setDate(scrollDate.getDate() + 1);
-        const dateToString = dateToISOString(scrollDate);
+        // scrollDate.setDate(scrollDate.getDate() + 1);
+        // const dateToString = dateToISOString(scrollDate);
 
-        let data = await getPortionAsteroidsAPI(dateToString);
+        // let data = await getPortionAsteroidsAPI(dateToString);
 
-        if (!data) {
-            return { notFound: true }
-        }
+        // if (!data) {
+        //     return { notFound: true }
+        // }
 
-        setAsteroidsListState([...asteroidsListState, ...data ])
-        setIsFetchingStatus(false)
+        // setAsteroidsListState([...asteroidsListState, ...data ])
+        // setIsFetchingStatus(false)
     }, [scrollDate, asteroidsListState])
 
 
