@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import styles from './Liquidation.module.css';
 import { AsteroidInListType} from "../../../types";
-import { parseFunction } from "../../../helpers/localStorageFunctions";
+import { getLiquidationKeys, getLiquidationList, parseFunction } from "../../../helpers/localStorageFunctions";
 import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
 import Button from "../../components/Button/Button";
 
@@ -14,33 +14,41 @@ import Button from "../../components/Button/Button";
 const Liquidation = React.memo( () => {
 
 
-  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([]);
-
- 
+  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
 
   useEffect( ()=>{
-    let arr = []
-    for (let key in window.localStorage) {
-      if (!(parseFunction(key)?.hasOwnProperty('neo_reference_id'))) {
-        continue;
-      } else {
-        arr.push(parseFunction(key));
-      }
-    }
-    setAsteroidsForLiquidation([...arr])
-
-
+    setAsteroidsForLiquidation(getLiquidationList())
   }, []) 
-  console.log(asteroidsForLiquidation)
- 
   
- 
-const onLiquidate = () =>{
-  window.localStorage.clear();
-  setAsteroidsForLiquidation([])
-  alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
-}
+  const onLiquidate = () =>{
+    window.localStorage.clear();
+    setAsteroidsForLiquidation([])
+    alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
+  }
   
+
+
+  //   asteroids For Liquidation state
+  const [asteroidsForLiquidationKeys, setAsteroidsForLiquidationKeys] = useState([]);
+
+
+  //   asteroids For Liquidation logic
+
+  useEffect(() => {
+    setAsteroidsForLiquidationKeys(getLiquidationKeys(getLiquidationList()))
+  }, [])
+
+  const toggleLiquidateOnClick = (id: string): void => {
+    asteroidsForLiquidationKeys.includes(id)
+      ? setAsteroidsForLiquidationKeys(asteroidsForLiquidationKeys.filter(item => item !== id))
+      : setAsteroidsForLiquidationKeys([...asteroidsForLiquidationKeys, id])
+  }
+
+
+
+
+
+
   return (
     <div className={styles.LiquidationWrapper}>
       <div className={styles.Liquidation}>
@@ -63,8 +71,11 @@ const onLiquidate = () =>{
                     asteroid={m} 
                     key={m.id} 
                     measureUnit={'km'} 
-                    isInLiquidationPage={true} 
-                    isInLiquidationList={true} />
+                    isInLiquidationList={asteroidsForLiquidationKeys.includes(m.id)}
+                    isInLiquidationPage={true}
+                    setLiquidationList={toggleLiquidateOnClick} 
+
+                     />
               )}  
             </div>
           </>

@@ -1,6 +1,3 @@
-export type AsteroidListType = Array<AsteroidInListType>;
-export type close_approach_dataType = Array<close_approach_dateType>;
-
 export type close_approach_dateType = {
     close_approach_date:  string
     close_approach_date_full: string
@@ -10,11 +7,9 @@ export type close_approach_dateType = {
     relative_velocity: relative_velocityType
 }
 
-
 export type AsteroidType = {
-
     absolute_magnitude_h: number;
-    close_approach_data: close_approach_dataType;
+    close_approach_data: Array<close_approach_dateType>;
     designation: string;
     estimated_diameter: estimated_diameterType
     id: string;
@@ -31,7 +26,7 @@ export type AsteroidType = {
 
 export type AsteroidInListType = {
     absolute_magnitude_h: number;
-    close_approach_data: close_approach_dataType;
+    close_approach_data: Array<close_approach_dateType>;
     estimated_diameter: estimated_diameterType
     id: string;
     is_potentially_hazardous_asteroid: boolean;

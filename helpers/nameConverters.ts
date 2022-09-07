@@ -38,8 +38,8 @@ export const planetConverter = (planet: string): string => {
         case 'Merc': return 'Меркурий'; break;
         case 'Venus': return 'Венера'; break;
         case 'Mars': return 'Марс'; break;
-        case 'Jupiter': return 'Юпитер'; break;
-        case 'Saturn': return 'Сатурн'; break;
+        case 'Juptr': return 'Юпитер'; break;
+        case 'Saturn':case 'Strn': case 'Satrn':return 'Сатурн'; break;
         case 'Uranus': return 'Уран'; break;
         case 'Neptune': return 'Нептун'; break;
         case 'Moon': return 'Луна'; break;

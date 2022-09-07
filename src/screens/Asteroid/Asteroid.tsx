@@ -1,4 +1,4 @@
-import React, {FC,  useState} from 'react';
+import React, {FC,  useEffect,  useState} from 'react';
 import classNames from '../../../node_modules/classnames/index';
 import styles from './Asteroid.module.css';
 const dinoImg = require('./../../../public/img/dinoImg.svg');
@@ -8,6 +8,7 @@ import { planetConverter } from "../../../helpers/nameConverters";
 import { AsteroidType } from '../../../types';
 import AsteroidCard from '../../components/AsteroidCard/AsteroidCard';
 import Button from '../../components/Button/Button';
+import { getLiquidationKeys, getLiquidationList } from '../../../helpers/localStorageFunctions';
  
 
   
@@ -20,7 +21,23 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
     // info block about closeApproach dates
     let [closeApproachPortion, setCloseApproachPortion] = useState(0 as number);
 
-   
+    //   asteroids For Liquidation 
+    const [asteroidsForLiquidationKeys, setAsteroidsForLiquidationKeys] = useState([]);
+
+    useEffect(() => {
+        setAsteroidsForLiquidationKeys(getLiquidationKeys(getLiquidationList()))
+    }, [])
+ 
+    const toggleLiquidateOnClick = (id: string): void => {
+        asteroidsForLiquidationKeys.includes(id)
+            ? setAsteroidsForLiquidationKeys(asteroidsForLiquidationKeys.filter(item => item !== id))
+            : setAsteroidsForLiquidationKeys([...asteroidsForLiquidationKeys, id])
+    }
+
+
+
+
+
     if (!asteroidInfo)  {      
         return (
             <div className={styles.AsteroidWrapper}>
@@ -41,8 +58,11 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
                         asteroid={asteroidInfo} 
                         measureUnit={'km'} 
                         key={asteroidInfo.id} 
+                        isInLiquidationList={asteroidsForLiquidationKeys.includes(asteroidInfo.id)}
+                        setLiquidationList={toggleLiquidateOnClick} 
                         isInLiquidationPage={false} 
-                        isInLiquidationList={false} />
+
+                    />
         </div>
 
     {asteroidInfo.close_approach_data.length > 1 && (

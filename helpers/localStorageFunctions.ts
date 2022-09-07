@@ -1,20 +1,21 @@
 import { AsteroidInListType } from "../types";
 
-export const toggleInLiquidationList = (add: boolean, asteroid: AsteroidInListType): void  => {
-    add
-        ?  window.localStorage.setItem(asteroid.id, JSON.stringify(asteroid))      
-        :  window.localStorage.removeItem(asteroid.id)
-        
-    console.log('button clicked')
+export const toggleInLiquidationList = ( asteroid: AsteroidInListType): void  => {
+    getLiquidationKeys(getLiquidationList()).includes(asteroid.id)
+        ? window.localStorage.removeItem(asteroid.id)
+        : window.localStorage.setItem(asteroid.id, JSON.stringify(asteroid))      
+    }
+
+export const parseFunction = (key: string) => {
+    return JSON.parse(window.localStorage.getItem(key))
 }
 
 
- 
 export const getLiquidationList = (): Array<AsteroidInListType>   => {
-    let arr: Array<AsteroidInListType>; 
+    let arr: Array<AsteroidInListType> = []; 
     
          for (let key in window.localStorage) {
-            if (!(parseFunction(key)?.hasOwnProperty('links')))       { 
+            if (!(parseFunction(key)?.hasOwnProperty('neo_reference_id')))       { 
                 continue;   
             } else {
                 arr.push(parseFunction(key));
@@ -25,32 +26,6 @@ export const getLiquidationList = (): Array<AsteroidInListType>   => {
 }
 
 
-
- 
-export const parseFunction = (key: string) => {
-    return JSON.parse(window.localStorage.getItem(key))
+export const getLiquidationKeys = (arr: Array<AsteroidInListType>): Array<string> => {  
+    return  arr.map(item => item.id)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export const getLiquidationListKeys = (): Array<string> => {
-//     try {
-//         return Object.keys(window.localStorage)
-//     } catch (err) {
-
-//     }
-//     return []
-// }

@@ -3,10 +3,11 @@ import { FC } from 'react'
 import { getPortionAsteroidsAPI } from '../../API/api';
 import Main from '../../src/screens/Main/Main'
 import { dateToISOString } from '../../helpers/dateConverters';
-import { AsteroidListType } from '../../types';
+import { AsteroidInListType } from '../../types';
 
 export const getStaticProps = async () => {
-    let dateToString = dateToISOString(new Date());
+    let newDate = new Date();
+    let dateToString = dateToISOString(newDate);
     const data = await getPortionAsteroidsAPI(dateToString);
  
     if (!data) {
@@ -20,7 +21,7 @@ export const getStaticProps = async () => {
  
 
 type PropsType = {
-    asteroidsList: AsteroidListType
+    asteroidsList: Array<AsteroidInListType>
 }
 
 const Asteroids: FC<PropsType> = ({asteroidsList}) => {

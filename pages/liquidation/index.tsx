@@ -2,7 +2,6 @@
 import { FC, useEffect, useState } from 'react';
 import { getLiquidationList, parseFunction } from '../../helpers/localStorageFunctions';
 import Liquidation from '../../src/screens/Liquidation/Liquidation';
-import { AsteroidInListType, AsteroidListType } from '../../types';
 
  
  

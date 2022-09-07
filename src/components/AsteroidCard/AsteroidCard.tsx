@@ -19,13 +19,23 @@ import Button from "../Button/Button";
 type PropsType = {
     asteroid: AsteroidInListType
     measureUnit: MeasureUnitType
-    isInLiquidationPage: boolean
     isInLiquidationList: boolean
+    isInLiquidationPage: boolean
+    setLiquidationList: any
 }
  
-const AsteroidCard = React.memo<PropsType> ( ({ asteroid, measureUnit,  isInLiquidationPage, isInLiquidationList }) => {
+const AsteroidCard = React.memo<PropsType>(({ asteroid, measureUnit, isInLiquidationList, isInLiquidationPage, setLiquidationList }) => {
+
+
+
     return (
-        <div className={styles.ListItem} >
+            <div className={classNames(
+                styles.ListItem ,
+                { [styles.nonActive]: isInLiquidationList && !isInLiquidationPage },
+                { [styles.nonActive]: !isInLiquidationList && isInLiquidationPage },
+            )}> 
+
+
 
             <div className={styles.Date}>
                 {dateConverter(dateCloserFinder(asteroid.close_approach_data))}   
@@ -73,14 +83,15 @@ const AsteroidCard = React.memo<PropsType> ( ({ asteroid, measureUnit,  isInLiqu
             </a></Link>
 
 
-            {(isInLiquidationPage) 
-                ? <Button
-                    text={' Оставить  '}
-                    onClickFunction={() => {  toggleInLiquidationList(false, asteroid) }}    />  
-                : <Button
-                    text={' Уничтожить  '}
-                    onClickFunction={() => {  toggleInLiquidationList(true, asteroid) }}    />                      
-            }
+                <Button
+                    text={isInLiquidationList ? ' Оставить  ' : ' Уничтожить  '}
+                    onClickFunction={() => {  
+                        toggleInLiquidationList(asteroid);
+                        setLiquidationList(asteroid.id)
+
+                    }}    
+                />  
+               
         
         
         </div>
