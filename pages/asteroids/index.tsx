@@ -6,8 +6,8 @@ import { dateToISOString } from '../../helpers/dateConverters';
 import { AsteroidInListType } from '../../types';
 
 export const getStaticProps = async () => {
-    let newDate = new Date();
-    let dateToString = dateToISOString(newDate);
+    // let newDate = new Date();
+    const dateToString = dateToISOString((new Date()));
     const data = await getPortionAsteroidsAPI(dateToString);
  
     if (!data) {

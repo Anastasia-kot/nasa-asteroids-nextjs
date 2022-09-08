@@ -25,7 +25,8 @@ export const dateConverter = (date: string): string => {
 }
 
 export const dateToISOString = (date: Date): string => {
-    return date.toISOString().split('T')[0];
+    if (date) { return date.toISOString().split('T')[0]; }
+    return (new Date()).toISOString().split('T')[0];
 }
 
 
