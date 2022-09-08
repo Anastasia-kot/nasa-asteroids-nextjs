@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './Liquidation.module.css';
 import { AsteroidInListType} from "../../../types";
 import { getLiquidationKeys, getLiquidationList, parseFunction } from "../../../helpers/localStorageFunctions";
 import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
 import Button from "../../components/Button/Button";
+import { dateCloserFinder } from "../../../helpers/dateConverters";
 
 
 // type Props = {
@@ -17,17 +18,17 @@ const Liquidation = React.memo( () => {
   const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
 
   useEffect( ()=>{
-    setAsteroidsForLiquidation(getLiquidationList())
+    setAsteroidsForLiquidation(
+      getLiquidationList().sort(function (a, b) {
+        return (
+          +(new Date(dateCloserFinder(a.close_approach_data))) - +(new Date(dateCloserFinder(b.close_approach_data)))
+          );
+      })
+      )
   }, []) 
   
-  const onLiquidate = () =>{
-    window.localStorage.clear();
-    setAsteroidsForLiquidation([])
-    alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
-  }
   
-
-
+  
   //   asteroids For Liquidation state
   const [asteroidsForLiquidationKeys, setAsteroidsForLiquidationKeys] = useState([]);
 
@@ -45,6 +46,18 @@ const Liquidation = React.memo( () => {
   }
 
 
+
+
+  const onLiquidate = () => {
+    asteroidsForLiquidationKeys.forEach((item) => {
+      window.localStorage.removeItem(item)
+    })   
+       // window.localStorage.clear();
+
+    setAsteroidsForLiquidation(asteroidsForLiquidation.filter(a => !asteroidsForLiquidationKeys.includes(a.id) ))
+    // setAsteroidsForLiquidation([]);
+    alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
+  }
 
 
 

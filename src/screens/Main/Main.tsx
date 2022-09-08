@@ -73,7 +73,9 @@ const Main: React.FC<PropsType> = ({asteroidsList}) => {
 
 // load-more logic
 
-    const handleScroll = useCallback(() => {
+    const handleScroll = useCallback((event) => {
+        event.preventDefault()
+
         if (!isFetchingStatus) {
             loadMore()
         }
@@ -82,10 +84,10 @@ const Main: React.FC<PropsType> = ({asteroidsList}) => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-        // window.addEventListener('mousewheel', handleScroll )
+        window.addEventListener('mousewheel', handleScroll )
         return () => {
             window.removeEventListener('scroll', handleScroll)
-            // window.removeEventListener('mousewheel', handleScroll)
+            window.removeEventListener('mousewheel', handleScroll)
         }
     }, [handleScroll])
 
