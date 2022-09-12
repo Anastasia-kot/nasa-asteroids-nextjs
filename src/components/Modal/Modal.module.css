@@ -1,0 +1,35 @@
+.containerHidden {
+display: none;
+}
+.containerActive {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+        z-index: 1;
+}
+
+.modal{
+    width: 400px;
+    height: 200px;
+    border: 5px solid #186DD6;
+    border-radius: 10px;
+    /* position: absolute; */
+    background-color: white;
+    /* z-index: 1; */
+    padding: 30px 60px;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+
+}

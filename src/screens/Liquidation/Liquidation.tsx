@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from './Liquidation.module.css';
 import { AsteroidInListType} from "../../../types";
-import { getLiquidationKeys, getLiquidationList, parseFunction } from "../../../helpers/localStorageFunctions";
+import { getLiquidationKeys, getLiquidationList, parseFunction, toggleInLiquidationList } from "../../../helpers/localStorageFunctions";
 import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
 import Button from "../../components/Button/Button";
 import { dateCloserFinder } from "../../../helpers/dateConverters";
+import Modal from "../../components/Modal/Modal";
 
 
 // type Props = {
@@ -13,6 +14,9 @@ import { dateCloserFinder } from "../../../helpers/dateConverters";
 
 
 const Liquidation = React.memo( () => {
+
+
+  const [modal, setModal] = useState({ isModal: false, asteroidModal: null } as { isModal: Boolean, asteroidModal: null | AsteroidInListType });
 
 
   const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
@@ -29,23 +33,22 @@ const Liquidation = React.memo( () => {
   
   
   
-  //   asteroids For Liquidation state
+  //   asteroids For Liquidation Keys
   const [asteroidsForLiquidationKeys, setAsteroidsForLiquidationKeys] = useState([]);
-
-
-  //   asteroids For Liquidation logic
 
   useEffect(() => {
     setAsteroidsForLiquidationKeys(getLiquidationKeys(getLiquidationList()))
   }, [])
 
   const toggleLiquidateOnClick = (id: string): void => {
-    asteroidsForLiquidationKeys.includes(id)
-      ? setAsteroidsForLiquidationKeys(asteroidsForLiquidationKeys.filter(item => item !== id))
-      : setAsteroidsForLiquidationKeys([...asteroidsForLiquidationKeys, id])
+    setModal((actual) => { 
+      return { 
+        ...actual, 
+        isModal: true, 
+        asteroidModal: asteroidsForLiquidation.find(asteroid => asteroid.id === id) 
+ }} 
+    );
   }
-
-
 
 
   const onLiquidate = () => {
@@ -61,7 +64,6 @@ const Liquidation = React.memo( () => {
 
 
 
-
   return (
     <div className={styles.LiquidationWrapper}>
       <div className={styles.Liquidation}>
@@ -69,6 +71,19 @@ const Liquidation = React.memo( () => {
         {asteroidsForLiquidation && 
         asteroidsForLiquidation.length > 0
           ?<>
+
+            { modal.isModal && <Modal 
+                asteroid={modal.asteroidModal}
+                resetFunction={() => { setModal((actual) => { return {...actual, isModal: false }}  )  }  }
+                deleteFunction={() => { 
+                  toggleInLiquidationList(modal.asteroidModal);
+                  setAsteroidsForLiquidation(asteroidsForLiquidation.filter(item => item !== modal.asteroidModal)); 
+                  setModal((actual) => { return { ...actual, isModal: false, asteroidModal: null } } )
+                }}
+
+             />}
+
+
             <h1 className={styles.Header}> Заказать уничтожение астероидов</h1>
             <div className={styles.HeaderLine}> </div>
             <p>Заказать бригаду имени Брюса Уиллиса для уничтожения выбранных астероидов</p>
@@ -87,7 +102,6 @@ const Liquidation = React.memo( () => {
                     isInLiquidationList={asteroidsForLiquidationKeys.includes(m.id)}
                     isInLiquidationPage={true}
                     setLiquidationList={toggleLiquidateOnClick} 
-
                      />
               )}  
             </div>

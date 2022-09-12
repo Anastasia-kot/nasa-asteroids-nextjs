@@ -67,9 +67,9 @@ const Header = () => {
                     <Link href='/liquidation'>
                         <a className={pathname === '/liquidation' ? styles.LinkActive : styles.Link}>
                             Заказ 
-                                <span className={styles.liquidateCount}>
-                                    {asteroidsForLiquidation.length>0 && asteroidsForLiquidation.length}
-                                </span>
+                            {asteroidsForLiquidation.length > 0 && <span className={styles.liquidateCount}>
+                                    {asteroidsForLiquidation.length}
+                                </span>}
                         </a>
                     </Link>
             </div>

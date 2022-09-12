@@ -85,11 +85,14 @@ const AsteroidCard = React.memo<PropsType>(({ asteroid, measureUnit, isInLiquida
 
                 <Button
                     text={isInLiquidationList ? ' Оставить  ' : ' Уничтожить  '}
-                    onClickFunction={() => {  
-                        toggleInLiquidationList(asteroid);
-                        setLiquidationList(asteroid.id)
+                    onClickFunction={isInLiquidationPage 
+                        ? () => {  
+                            setLiquidationList(asteroid.id)}
+                        : () => {
+                            toggleInLiquidationList(asteroid);
+                            setLiquidationList(asteroid.id)}
 
-                    }}    
+                    }    
                 />  
                
         

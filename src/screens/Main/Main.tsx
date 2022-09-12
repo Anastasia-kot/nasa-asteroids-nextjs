@@ -33,7 +33,6 @@ const Main: React.FC<PropsType> = ({asteroidsList}) => {
 
 
 //   asteroids For Liquidation logic
-
     useEffect(() => {
         setAsteroidsForLiquidationKeys(getLiquidationKeys(getLiquidationList()))
     }, [])
