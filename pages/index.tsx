@@ -14,15 +14,11 @@ const Home: FC = () => {
     setTimeout(() => {
       router.push('/asteroids')
     },
-      3000 
+      1000 
     )
   }, [router])
 
-  useEffect(() => {
-    window.localStorage.clear();
-    }, [])
-
-
+ 
   return (
     <div className={styles.MainWrapper}>
       <div className={styles.Main}>

@@ -4,17 +4,26 @@ import Link from "../../../node_modules/next/link";
 import { useRouter } from "../../../node_modules/next/router";
 import { dateToISOString } from "../../../helpers/dateConverters";
 import { getBackGroundImgAPI } from "../../../API/api";
+import { AsteroidInListType } from "../../../types";
+import { getLiquidationList } from "../../../helpers/localStorageFunctions";
  
 
 const Header = () => {
 
-
     const [backgroundImage, setBackgroundImage] = useState(null);
 
      
+    //   asteroids For Liquidation state
+    const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
 
 
+    //   asteroids For Liquidation logic
+    useEffect(() => {
+        setAsteroidsForLiquidation(getLiquidationList())
+    }, [])
 
+
+    //    Background Image logic
     useEffect( () => {
         const endDateISO = dateToISOString(new Date())
        
@@ -34,8 +43,8 @@ const Header = () => {
 
 
 
-
-const {pathname} = useRouter(); 
+    //    redirect logic
+    const {pathname} = useRouter(); 
 
 
     return( 
@@ -57,7 +66,10 @@ const {pathname} = useRouter();
                     </Link>
                     <Link href='/liquidation'>
                         <a className={pathname === '/liquidation' ? styles.LinkActive : styles.Link}>
-                            Заказ
+                            Заказ 
+                                <span className={styles.liquidateCount}>
+                                    {asteroidsForLiquidation.length>0 && asteroidsForLiquidation.length}
+                                </span>
                         </a>
                     </Link>
             </div>
