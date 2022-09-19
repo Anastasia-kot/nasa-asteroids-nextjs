@@ -8,6 +8,9 @@ export const getPortionAsteroidsAPI = async (date: string) => {
         // проверить что 200 ОК
 
         const data = await resp.json();
+
+        
+
         // return null;
 
         return (data.near_earth_objects[date]);

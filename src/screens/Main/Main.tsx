@@ -47,12 +47,17 @@ const Main: React.FC<PropsType> = ({asteroidsList}) => {
 
 
 
-    const loadMore = useCallback( async () => {
+
+
+
+// load-more logic
+ 
+
+
+    const loadMore = useCallback(async () => {
         setIsFetchingStatus(true)
 
-
         scrollDate.setDate(scrollDate.getDate() + 1);
-
 
         const dateToString = dateToISOString(scrollDate);
 
@@ -62,38 +67,45 @@ const Main: React.FC<PropsType> = ({asteroidsList}) => {
             return { notFound: true }
         }
 
-        setAsteroidsListState([...asteroidsListState, ...data ])
+        setAsteroidsListState([...asteroidsListState, ...data])
         setIsFetchingStatus(false)
+
     }, [scrollDate, asteroidsListState])
 
 
+    
+    const checkPosition = useCallback(() => {
 
+        const height = document.body.offsetHeight
+        const screenHeight = window.innerHeight
 
+        const scrolled = window.scrollY
+ 
+        const threshold = height - screenHeight / 1000
 
-// load-more logic
+        const position = scrolled + screenHeight
 
-    const handleScroll = useCallback((event) => {
-        event.preventDefault()
-
-        if (!isFetchingStatus) {
+        if (position >= threshold && !isFetchingStatus) {
             loadMore()
         }
-    }, [loadMore, isFetchingStatus])
-    //use call back
+    }, [isFetchingStatus, loadMore ])
+
+
+
+
 
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('mousewheel', handleScroll )
+        window.addEventListener('scroll', checkPosition)
+        window.addEventListener('resize', checkPosition)
+
         return () => {
-            window.removeEventListener('scroll', handleScroll)
-            window.removeEventListener('mousewheel', handleScroll)
+            window.addEventListener('scroll', checkPosition)
+            window.addEventListener('resize', checkPosition)
         }
-    }, [handleScroll])
+    }, [checkPosition])
 
     
-    
-
-
+      
 
     return (
         <div className={styles.MainWrapper}>

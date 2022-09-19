@@ -5,41 +5,38 @@ import { getLiquidationKeys, getLiquidationList, parseFunction, toggleInLiquidat
 import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
 import Button from "../../components/Button/Button";
 import { dateCloserFinder } from "../../../helpers/dateConverters";
-import {Modal} from "../../components/Modal/Modal";
+import { Modal  } from "../../components/Modal/Modal";
 
 
-// type Props = {
-//   asteroidsForLiquidation: Array<AsteroidInListType>
-// }
+type Props = {
+  asteroidsForLiquidationList: Array<AsteroidInListType>,
+  liquidationKeys: Array<string>
+}
 
 
-const Liquidation = React.memo( () => {
+const Liquidation: React.FC<Props> = React.memo(({ asteroidsForLiquidationList, liquidationKeys }) => {
 
 
-  //  state + get state logic
-
-  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
-
-  useEffect( ()=>{
-    setAsteroidsForLiquidation(
-      getLiquidationList().sort(function (a, b) {
-        return (
-          +(new Date(dateCloserFinder(a.close_approach_data))) - +(new Date(dateCloserFinder(b.close_approach_data)))
-          );
-      })
-      )
-  }, []) 
-  
-  
-  
+  //  state  
+  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([...asteroidsForLiquidationList] as Array<AsteroidInListType>);
 
 
+ 
 
-
-
-  // props and state for modal  change asteroid  liquidation list
+  //   modal   - change  liquidation list
 
   const [modalOnChange, setModalOnChange] = useState({ isModal: false, asteroidModal: null } as { isModal: Boolean, asteroidModal: null | AsteroidInListType });
+
+  const toggleLiquidateOnClick = (id: string): void => {
+    setModalOnChange((actual) => {
+      return {
+        ...actual,
+        isModal: true,
+        asteroidModal: asteroidsForLiquidation.find(asteroid => asteroid.id === id)
+      }
+    }
+    )
+  }
 
   const onClickFunctionsChange = [
     () => {
@@ -56,55 +53,25 @@ const Liquidation = React.memo( () => {
       'Отмена', 
   ]
 
-  //  change asteroid  liquidation list -  get  Keys
-  const [asteroidsForLiquidationKeys, setAsteroidsForLiquidationKeys] = useState([]);
-
-  useEffect(() => {
-    setAsteroidsForLiquidationKeys(getLiquidationKeys(getLiquidationList()))
-  }, [])
-
-  const toggleLiquidateOnClick = (id: string): void => {
-    setModalOnChange((actual) => { 
-      return { 
-        ...actual, 
-        isModal: true, 
-        asteroidModal: asteroidsForLiquidation.find(asteroid => asteroid.id === id) 
- }} 
-    );
-  }
 
 
 
+  // modal liquidate all
 
-
-
-
-
-
-
-
-
-
-  // props and state for modal      liquidate
-
-  const [modalLiquidate, setModalLiquidate] = useState(false as boolean);
+  const [isModalLiquidate, setIsModalLiquidate] = useState(false as boolean);
 
 
   const onLiquidate = () => {
-    setModalLiquidate(true)
-    // asteroidsForLiquidationKeys.forEach((item) => {
-    //   window.localStorage.removeItem(item)
-    // })   
-    
-    // alert('11')
+    setIsModalLiquidate(true)
   }
+
   const onClickFunctionsLiquidate = [
     () => { 
-      asteroidsForLiquidationKeys.forEach((item) => {
+      liquidationKeys.forEach((item) => {
         window.localStorage.removeItem(item)
       })   
-      setAsteroidsForLiquidation(asteroidsForLiquidation.filter(a => !asteroidsForLiquidationKeys.includes(a.id)))
-      setModalLiquidate(false) 
+      setAsteroidsForLiquidation(asteroidsForLiquidation.filter(a => !liquidationKeys.includes(a.id)))
+      setIsModalLiquidate(false) 
     },
   ]
   const onClickTextLiquidate = [ 'Ок' ]
@@ -113,11 +80,6 @@ const Liquidation = React.memo( () => {
  
 
  
-
-
-
-
-
 
   return (
     <div className={styles.LiquidationWrapper}>
@@ -133,7 +95,7 @@ const Liquidation = React.memo( () => {
                 onClickText = {onClickTextChange}
                 modalText='Вы уверены, что хотите удалить астероид  из корзины для заказа?'
             />}
-            {modalLiquidate && <Modal 
+            {isModalLiquidate && <Modal 
                 data={null}
                 onClickFunctions={onClickFunctionsLiquidate}
                 onClickText={onClickTextLiquidate}
@@ -149,14 +111,14 @@ const Liquidation = React.memo( () => {
 
             <Button
               text={'Уничтожить'}
-              onClickFunction={() => { onLiquidate() }} />  
+              onClickFunction={onLiquidate} />  
 
              <div className={styles.AsteroidsBlock}> {asteroidsForLiquidation.map(m =>
                <AsteroidCard  //создать колбек 'он_делит' и прокинуть
                     asteroid={m} 
                     key={m.id} 
                     measureUnit={'km'} 
-                    isInLiquidationList={asteroidsForLiquidationKeys.includes(m.id)}
+                    isInLiquidationList={liquidationKeys.includes(m.id)}
                     isInLiquidationPage={true}
                     setLiquidationList={toggleLiquidateOnClick} 
                      />
