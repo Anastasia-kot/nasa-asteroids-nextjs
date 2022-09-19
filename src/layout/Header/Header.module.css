@@ -49,8 +49,6 @@
 .CompanyInfoWrapper {
     display: flex;
     flex-direction: column;
-    /* padding-top: 16px;
-    padding-left: 30px; */
     margin-bottom: 16px;
 }
 
@@ -79,8 +77,6 @@
 
 .LinksWrapper {
     display: flex;
-    /* padding-right: 30px;
-    padding-top: 16px; */
     flex-direction: row;
     align-items: flex-start;
     gap: 24px;

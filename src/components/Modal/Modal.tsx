@@ -6,23 +6,32 @@ import classNames from '../../../node_modules/classnames/index'
 import Button from '../Button/Button';
 
  
+type Props = {
+    onClickFunctions: Array<()=>void> | null,
+    onClickText: Array<string> | null,
+    modalText: string,
+    data: any | null,
+} 
+
+export const Modal: FC<any> = ({ onClickFunctions, onClickText, modalText, data }) => {
  
- 
-const Modal: FC<any> = ({ asteroid, resetFunction, deleteFunction }) => (
+    return (
     <div className={styles.containerActive}>
-    <div className={styles.modal}>
-        <div className={styles.question}>Вы уверены, что хотите удалить астероид  
-                {' ' +  nameConverter(asteroid.name) + ' '}
-          из корзины для заказа?</div>
-          
-        <div className={styles.buttons}>
-                <Button text='Да' onClickFunction={() => { deleteFunction(asteroid) }} />
-                <Button text='Отмена' onClickFunction={() => { resetFunction() }} />
-        </div>
-        
+        <div className={styles.modal}>
+            <div className={styles.question}>
+                {modalText}
+                {data && 'Астероид: ' + nameConverter(data.name) }
+            </div>
+
+            <div className={styles.buttons}>
+                {onClickFunctions.map( (currentValue, index) => 
+                    <Button text={onClickText[index]} onClickFunction={currentValue} key={index}/>
+                )}
+ 
+            </div>
+
         </div>
     </div>
-)
+)}
 
-export default Modal;
-
+            

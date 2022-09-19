@@ -8,7 +8,7 @@
     gap: 8px;
 }
 
-.nonActive{
+.nonActive {
     opacity: 0.5;
 }
 
@@ -42,13 +42,28 @@
     overflow: hidden;
 }
 
+
 .dino {
     position: absolute;
     width: 30px;
     height: 25.71px;
     right: 8px;
     bottom: 0px;
+    transition: transform 1s ease
 }
+
+.ListItem:hover .dino {
+    transform: translateX(-30px) translateY(-45px);
+    transition: transform 1s ease;
+}
+
+.ListItem:hover .dino  {
+    transform: translateX(-12px) translateY(-22px);
+    transition: transform 1s ease;
+}
+
+
+
 
 .asteroid {
     position: absolute;
@@ -131,48 +146,3 @@
 
 .AsteroidIsDanger {}
 
-.AsteroidLiquidate {
-    /* Auto layout */
-
-    /* display: flex;
-    flex-direction: row;
-    align-items: center; */
-    padding: 2px 11px;
-    /* gap: 2px; */
-
-    /* width: min-content; */
-    height: 24px;
-
-    /* Blue Base */
-
-    background: #186DD6;
-    border-radius: 24px;
-
-
-
-
-    /* Text */
-
-
-    /* width: 88px; */
-    /* height: 20px; */
-
-    font-family: 'Helvetica';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 11px;
-    line-height: 20px;
-    /* identical to box height, or 182% */
-
-    display: flex;
-    align-items: center;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-
-    /* White Base */
-
-    color: #FFFFFF;
-
-
-
-}

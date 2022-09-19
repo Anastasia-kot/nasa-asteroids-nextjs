@@ -19,8 +19,11 @@ const Header = () => {
 
     //   asteroids For Liquidation logic
     useEffect(() => {
-        setAsteroidsForLiquidation(getLiquidationList())
-    }, [])
+        setInterval(()=>{
+            setAsteroidsForLiquidation(getLiquidationList())
+            }, 1500 
+        )
+     }, [])
 
 
     //    Background Image logic

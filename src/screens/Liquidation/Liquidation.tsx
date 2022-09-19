@@ -5,7 +5,7 @@ import { getLiquidationKeys, getLiquidationList, parseFunction, toggleInLiquidat
 import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
 import Button from "../../components/Button/Button";
 import { dateCloserFinder } from "../../../helpers/dateConverters";
-import Modal from "../../components/Modal/Modal";
+import {Modal} from "../../components/Modal/Modal";
 
 
 // type Props = {
@@ -16,8 +16,7 @@ import Modal from "../../components/Modal/Modal";
 const Liquidation = React.memo( () => {
 
 
-  const [modal, setModal] = useState({ isModal: false, asteroidModal: null } as { isModal: Boolean, asteroidModal: null | AsteroidInListType });
-
+  //  state + get state logic
 
   const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
 
@@ -33,7 +32,31 @@ const Liquidation = React.memo( () => {
   
   
   
-  //   asteroids For Liquidation Keys
+
+
+
+
+
+  // props and state for modal  change asteroid  liquidation list
+
+  const [modalOnChange, setModalOnChange] = useState({ isModal: false, asteroidModal: null } as { isModal: Boolean, asteroidModal: null | AsteroidInListType });
+
+  const onClickFunctionsChange = [
+    () => {
+      toggleInLiquidationList(modalOnChange.asteroidModal);
+      setAsteroidsForLiquidation(asteroidsForLiquidation.filter(item => item !== modalOnChange.asteroidModal));
+      setModalOnChange((actual) => { return { ...actual, isModal: false, asteroidModal: null } })
+    },
+   () => { setModalOnChange((actual) => { return { ...actual, isModal: false } }) },
+   
+  ]
+
+  const onClickTextChange = [
+      'Да',
+      'Отмена', 
+  ]
+
+  //  change asteroid  liquidation list -  get  Keys
   const [asteroidsForLiquidationKeys, setAsteroidsForLiquidationKeys] = useState([]);
 
   useEffect(() => {
@@ -41,7 +64,7 @@ const Liquidation = React.memo( () => {
   }, [])
 
   const toggleLiquidateOnClick = (id: string): void => {
-    setModal((actual) => { 
+    setModalOnChange((actual) => { 
       return { 
         ...actual, 
         isModal: true, 
@@ -51,16 +74,48 @@ const Liquidation = React.memo( () => {
   }
 
 
-  const onLiquidate = () => {
-    asteroidsForLiquidationKeys.forEach((item) => {
-      window.localStorage.removeItem(item)
-    })   
-       // window.localStorage.clear();
 
-    setAsteroidsForLiquidation(asteroidsForLiquidation.filter(a => !asteroidsForLiquidationKeys.includes(a.id) ))
-    // setAsteroidsForLiquidation([]);
-    alert('Бригада имени Брюса Уиллиса выехала на уничтожение')
+
+
+
+
+
+
+
+
+
+
+  // props and state for modal      liquidate
+
+  const [modalLiquidate, setModalLiquidate] = useState(false as boolean);
+
+
+  const onLiquidate = () => {
+    setModalLiquidate(true)
+    // asteroidsForLiquidationKeys.forEach((item) => {
+    //   window.localStorage.removeItem(item)
+    // })   
+    
+    // alert('11')
   }
+  const onClickFunctionsLiquidate = [
+    () => { 
+      asteroidsForLiquidationKeys.forEach((item) => {
+        window.localStorage.removeItem(item)
+      })   
+      setAsteroidsForLiquidation(asteroidsForLiquidation.filter(a => !asteroidsForLiquidationKeys.includes(a.id)))
+      setModalLiquidate(false) 
+    },
+  ]
+  const onClickTextLiquidate = [ 'Ок' ]
+
+
+ 
+
+ 
+
+
+
 
 
 
@@ -72,16 +127,18 @@ const Liquidation = React.memo( () => {
         asteroidsForLiquidation.length > 0
           ?<>
 
-            { modal.isModal && <Modal 
-                asteroid={modal.asteroidModal}
-                resetFunction={() => { setModal((actual) => { return {...actual, isModal: false }}  )  }  }
-                deleteFunction={() => { 
-                  toggleInLiquidationList(modal.asteroidModal);
-                  setAsteroidsForLiquidation(asteroidsForLiquidation.filter(item => item !== modal.asteroidModal)); 
-                  setModal((actual) => { return { ...actual, isModal: false, asteroidModal: null } } )
-                }}
-
-             />}
+            {modalOnChange.isModal && <Modal 
+                data={modalOnChange.asteroidModal}
+                onClickFunctions = { onClickFunctionsChange }
+                onClickText = {onClickTextChange}
+                modalText='Вы уверены, что хотите удалить астероид  из корзины для заказа?'
+            />}
+            {modalLiquidate && <Modal 
+                data={null}
+                onClickFunctions={onClickFunctionsLiquidate}
+                onClickText={onClickTextLiquidate}
+                modalText='Бригада имени Брюса Уиллиса выехала на уничтожение'
+            />}
 
 
             <h1 className={styles.Header}> Заказать уничтожение астероидов</h1>
