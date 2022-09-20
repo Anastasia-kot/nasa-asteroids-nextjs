@@ -1,15 +1,17 @@
 .AsteroidWrapper {
     width: 100%;
+    box-sizing: border-box;
+    background-color: white;
 }
 @media (min-width: 321px) {
     .AsteroidWrapper {
-        margin: 0 30px;
+        padding: 0 30px;
     }
 }
 
 @media (max-width: 320px) {
     .AsteroidWrapper {
-        margin: 0 16px;
+        padding: 0 16px;
     }
 }
 

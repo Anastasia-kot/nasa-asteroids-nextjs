@@ -1,15 +1,18 @@
 .Footer{
-    width: 100% ;
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+
 }
 @media (min-width: 321px) {
     .Footer {
-        margin: 0 30px;
+        padding: 0 30px;
     }
 }
 
 @media (max-width: 320px) {
     .Footer {
-        margin: 0 16px;
+        padding: 0 16px;
     }
 }
 

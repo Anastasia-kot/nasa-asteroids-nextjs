@@ -2,8 +2,8 @@ import { AsteroidInListType } from "../types";
 
 export const toggleInLiquidationList = ( asteroid: AsteroidInListType): void  => {
     getLiquidationKeys(getLiquidationList()).includes(asteroid.id)
-        ? window.localStorage.removeItem(asteroid.id)
-        : window.localStorage.setItem(asteroid.id, JSON.stringify(asteroid))      
+        ? window?.localStorage.removeItem(asteroid.id)
+        : window?.localStorage.setItem(asteroid.id, JSON.stringify(asteroid))      
     }
 
 export const parseFunction = (key: string) => {
@@ -13,16 +13,18 @@ export const parseFunction = (key: string) => {
 
 export const getLiquidationList = (): Array<AsteroidInListType>   => {
     let arr: Array<AsteroidInListType> = []; 
-    
-         for (let key in window.localStorage) {
-            if (!(parseFunction(key)?.hasOwnProperty('neo_reference_id')))       { 
+        
+         for (let key in window?.localStorage) {
+            if (!(parseFunction(key)?.hasOwnProperty('neo_reference_id')))   { 
                 continue;   
             } else {
                 arr.push(parseFunction(key));
             }
         }
- 
+   
     return arr
+    
+     
 }
 
 
