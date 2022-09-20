@@ -12,19 +12,37 @@ type Props = {
   asteroidsForLiquidationList: Array<AsteroidInListType>,
   liquidationKeys: Array<string>
 }
+// const Liquidation: React.FC<Props> = React.memo(({ asteroidsForLiquidationList, liquidationKeys }) => {
 
 
-const Liquidation: React.FC<Props> = React.memo(({ asteroidsForLiquidationList, liquidationKeys }) => {
+const Liquidation: React.FC<any> = React.memo(() => {
 
 
   //  state  
-  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([...asteroidsForLiquidationList] as Array<AsteroidInListType>);
+  const [asteroidsForLiquidation, setAsteroidsForLiquidation] = useState([] as Array<AsteroidInListType>);
 
+  useEffect( () => {
+    setAsteroidsForLiquidation( 
+      getLiquidationList().sort(function (a, b) {
+        return (
+          +(new Date(dateCloserFinder(a.close_approach_data))) - +(new Date(dateCloserFinder(b.close_approach_data)))
+        )
+      })
+     )
+  }, []  )
+ 
+  const [liquidationKeys, setLiquidationKeys] = useState([] as Array<string>);
 
+  useEffect(() => {
+    setLiquidationKeys(
+      getLiquidationKeys(getLiquidationList())
+    )
+  }, [])
+  
+ 
  
 
   //   modal   - change  liquidation list
-
   const [modalOnChange, setModalOnChange] = useState({ isModal: false, asteroidModal: null } as { isModal: Boolean, asteroidModal: null | AsteroidInListType });
 
   const toggleLiquidateOnClick = (id: string): void => {

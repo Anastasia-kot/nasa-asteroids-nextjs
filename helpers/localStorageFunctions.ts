@@ -13,16 +13,18 @@ export const parseFunction = (key: string) => {
 
 export const getLiquidationList = (): Array<AsteroidInListType>   => {
     let arr: Array<AsteroidInListType> = []; 
-        
-         for (let key in window?.localStorage) {
-            if (!(parseFunction(key)?.hasOwnProperty('neo_reference_id')))   { 
-                continue;   
-            } else {
-                arr.push(parseFunction(key));
+    if (window) {
+            for (let key in window?.localStorage) {
+                if (!(parseFunction(key)?.hasOwnProperty('neo_reference_id'))) {
+                    continue;
+                } else {
+                    arr.push(parseFunction(key));
+                }
             }
-        }
+        }  
+    
    
-    return arr
+    return arr;
     
      
 }
