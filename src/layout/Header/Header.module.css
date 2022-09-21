@@ -4,6 +4,8 @@
     overflow: hidden;
     position: relative;
     width: 100%;
+    min-width: 393px;
+    box-sizing: border-box;
 }
 
 .HeaderImg {
@@ -22,7 +24,6 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 16px;
     z-index: 1;
     position: relative;
     text-shadow: 10px 10px 20px rgb(0, 0, 0), 
