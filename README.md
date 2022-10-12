@@ -3,8 +3,8 @@
 
 ## Использованный стек/ технические требования:
 + Адаптивная вёрстка;
-+ По [макету Figma](https://www.figma.com/file/UOdZ5Qzkif1Ideye76OpjA/Armaggedon-V2?node-id=0%3A1)
-+ Взаимодействие с [API NASA](https://api.nasa.gov);
++ По [макету Figma](https://www.figma.com/file/UOdZ5Qzkif1Ideye76OpjA/Armaggedon-V2?node-id=0%3A1 "https://www.figma.com/file/UOdZ5Qzkif1Ideye76OpjA/Armaggedon-V2?node-id=0%3A1")
++ Взаимодействие с [API NASA](https://api.nasa.gov "https://api.nasa.gov");
 + Next.js;
 + Без использования redux (текущие данные хранятся в LocalStorage);
 + Стилизация с помощью CSS модулей;
