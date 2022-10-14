@@ -125,8 +125,20 @@ const Main: React.FC<PropsType> = ({asteroidsList}) => {
                             onClick={()=>setMeasureUnit('orbit')} > в лунных орбитах 
                         </button> 
                     </div>
-                
-                    <label className={styles.MainParametersDangerous} >
+                  
+                        <input 
+                            type='checkbox'
+                            id='isDangerousCheckbox' 
+                            name='isDangerousCheckbox' 
+                            className={styles.MainParametersDangerousInput} 
+                            onClick={() => setIsDangerFlag(!isDangerFlag)}/> 
+                        <label
+                            htmlFor='isDangerousCheckbox' 
+                            className={styles.MainParametersDangerous} > 
+                            Показать только опасные
+                        </label>
+
+                    {/* <label className={styles.MainParametersDangerous} >
                         <input 
                             type='checkbox' 
                             className={styles.MainParametersDangerousInput} 
@@ -134,7 +146,7 @@ const Main: React.FC<PropsType> = ({asteroidsList}) => {
                         <span className={styles.MainParametersDangerousSpan}>
                             Показать только опасные
                         </span>
-                    </label>
+                    </label> */}
                 </div>
                 <div className={styles.AsteroidsBlock}>
                     {!!asteroidsListState && (asteroidsListState.length > 0) && 

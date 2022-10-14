@@ -26,10 +26,10 @@
     flex-wrap: wrap;
     z-index: 1;
     position: relative;
-    text-shadow: 10px 10px 20px rgb(0, 0, 0), 
-                -10px -10px 20px rgb(0, 0, 0), 
-                10px -10px 20px rgb(0, 0, 0), 
-                -10px 10px 20px rgb(0, 0, 0);
+    text-shadow: 10px 10px 20px rgb(0, 0, 0),
+        -10px -10px 20px rgb(0, 0, 0),
+        10px -10px 20px rgb(0, 0, 0),
+        -10px 10px 20px rgb(0, 0, 0);
 }
 
 @media (min-width: 321px) {
@@ -108,17 +108,17 @@
 }
 
 .liquidateCount {
-        text-decoration: none;
-        position: absolute;
-        top: -5px;
-        right: -20px;
-        font-size: 12px;
-        line-height: 12px;
-        border: 1px solid white;
-        padding: 1px;
-        margin: 0;
+    text-decoration: none;
+    position: absolute;
+    top: -5px;
+    right: -20px;
+    font-size: 12px;
+    line-height: 12px;
+    border: 1px solid white;
+    padding: 1px;
+    margin: 0;
 }
 
 .LinkActive .liquidateCount {
-            border: none;
+    border: none;
 }

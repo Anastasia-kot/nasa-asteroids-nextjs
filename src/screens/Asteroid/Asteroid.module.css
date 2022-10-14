@@ -2,7 +2,9 @@
     width: 100%;
     box-sizing: border-box;
     background-color: white;
+    color: #000000;
 }
+
 @media (min-width: 321px) {
     .AsteroidWrapper {
         padding: 0 30px;

@@ -1,6 +1,7 @@
 .Footer{
     width: 100%;
     background-color: white;
+    color: black;
     box-sizing: border-box;
 
 }
@@ -23,7 +24,7 @@
         max-width: 1000px;
         min-width: 362px;
         padding: 16px 0;
-        margin-top: 50px;
+        padding-top: 50px;
         
 
 
