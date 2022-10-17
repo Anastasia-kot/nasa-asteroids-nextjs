@@ -65,7 +65,7 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
                     />
         </div>
 
-    {asteroidInfo.close_approach_data.length > 1 && (
+    {asteroidInfo.close_approach_data?.length > 1 && (
         <>
             <h1 className={styles.Header}> Список сближений:</h1>
             <div className={styles.HeaderLine}> </div>
@@ -78,7 +78,7 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
                             <div>
                                 <img
                                     src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiIqtoOfZk6CxmtN4NW_o18StDiWf6o1l6DUhlonAzPA&s'
-                                    className={styles.spidometr}
+                                    className={styles.speedometer}
                                     alt='спидометр' />
                                 <span>{' '}{Math.ceil(+d.relative_velocity.kilometers_per_hour)}</span> км/ч
                             </div>
@@ -88,7 +88,7 @@ const Asteroid: FC<PropsType> = ({ asteroidInfo }) => {
                     )}
                 })}
             </div>
-                {(asteroidInfo.close_approach_data.length > ((closeApproachPortion + 1) * 10)) &&
+                {(asteroidInfo.close_approach_data?.length > ((closeApproachPortion + 1) * 10)) &&
                     <Button 
                         text={'Загрузить сближения'} 
                         onClickFunction={() => { setCloseApproachPortion(closeApproachPortion + 1) }}/>                        

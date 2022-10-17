@@ -1,8 +1,10 @@
 .Footer{
     width: 100%;
+    min-width: 393px;
     background-color: white;
     color: black;
     box-sizing: border-box;
+   
 
 }
 @media (min-width: 321px) {

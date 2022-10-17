@@ -2,8 +2,10 @@
     width: 100%;
     background-color: rgb(255, 255, 255); 
     box-sizing: border-box;
-    color:black;   
-}
+    color:black;
+    position: relative;
+    min-width: 393px;
+ }
 @media (min-width: 321px) {
     .MainWrapper {
         padding: 0 30px;
@@ -37,11 +39,9 @@
 }
 
 .MainHeaderLine {
-    /* content: ''; */
     border-top: 1px solid #D7D7D7;
     height: 0px;
     display: block;
-    /* width: 100%; */
     margin: 8px 0;
     margin-right: 30px;
 
@@ -69,9 +69,7 @@
     margin-bottom: 40px;
 }
 
-.MainParametersDistance {
-    /* display: inline; */
-}
+
 
 .ParameterDistance {
     font-family: Helvetica;

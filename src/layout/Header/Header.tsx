@@ -56,27 +56,27 @@ const Header = () => {
                 <img className={styles.HeaderImg} src={backgroundImage} alt='universe' width='100%' height='auto'  /> 
             }
              
-        <div className={styles.Header}>
-            <div className={styles.CompanyInfoWrapper}>
-                <div className={styles.CompanyName}>Armageddon v2</div>
-                <div className={styles.CompanyAbout}>Сервис заказа уничтожения астероидов, опасно подлетающих к Земле.</div>
+            <div className={styles.Header}>
+                <div className={styles.CompanyInfoWrapper}>
+                    <div className={styles.CompanyName}>Armageddon v2</div>
+                    <div className={styles.CompanyAbout}>Сервис заказа уничтожения астероидов, опасно подлетающих к Земле.</div>
+                </div>
+                <div className={styles.LinksWrapper}>
+                        <Link href='/asteroids'>
+                            <a className={pathname === '/asteroids' ? styles.LinkActive : styles.Link}>
+                                Астероиды
+                            </a>
+                        </Link>
+                        <Link href='/liquidation'>
+                            <a className={pathname === '/liquidation' ? styles.LinkActive : styles.Link}>
+                                Заказ 
+                                {asteroidsForLiquidation.length > 0 && <span className={styles.liquidateCount}>
+                                        {asteroidsForLiquidation.length}
+                                    </span>}
+                            </a>
+                        </Link>
+                </div>
             </div>
-            <div className={styles.LinksWrapper}>
-                    <Link href='/asteroids'>
-                        <a className={pathname === '/asteroids' ? styles.LinkActive : styles.Link}>
-                            Астероиды
-                        </a>
-                    </Link>
-                    <Link href='/liquidation'>
-                        <a className={pathname === '/liquidation' ? styles.LinkActive : styles.Link}>
-                            Заказ 
-                            {asteroidsForLiquidation.length > 0 && <span className={styles.liquidateCount}>
-                                    {asteroidsForLiquidation.length}
-                                </span>}
-                        </a>
-                    </Link>
-            </div>
-        </div>
         </div>
     )
 }
